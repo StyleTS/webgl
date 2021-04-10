@@ -1,0 +1,471 @@
+﻿[
+    {
+        "name": "ShangBanJi1",
+        "url": "JSON/PE-EA-1-YunJia-0-1800x970x1250-Primary.js",
+        "position": [
+            -10165.32,
+            953.085,
+            10157.785
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "YingShuaJi1",
+        "url": "JSON/PE-EA-2-DEK-Horizon03iX-1340x1636x1467-Primary.js",
+        "position": [
+            -8588.409,
+            981,
+            10157.786
+        ]
+    },
+    {
+        "name": "SPI1",
+        "url": "JSON/PE-EA-3-Pemtron-TROI7700E-1945x1867x1995-1.js",
+        "position": [
+            -7295.821,
+            997.504,
+            10157.785
+        ]
+    },
+    {
+        "name": "JieBoTai1",
+        "url": "JSON/PE-EA-4-DackStation-Single-1000x605x900-Primary.js",
+        "position": [
+            -6185.819,
+            450,
+            10157.786
+        ]
+    },
+    {
+        "name": "DianJiaoJi1",
+        "url": "JSON/PE-EA-13-DP-1-1676x1706x2154-1.js",
+        "position": [
+            -5085.819,
+            1077.134,
+            10157.786
+        ]
+    },
+    {
+        "name": "JieBoTai2",
+        "url": "JSON/PE-EA-4-DackStation-Single-1000x605x900-Primary.js",
+        "position": [
+            -3985.819,
+            450,
+            10157.786
+        ]
+    },
+    {
+        "name": "TiePianJi1",
+        "url": "JSON/PE-EA-5-FuShi-1-3893x2065x2340-Primary.js",
+        "position": [
+            -1543.927,
+            1167.232,
+            9840.864
+        ]
+    },
+    {
+        "name": "JieBoTai3",
+        "url": "JSON/PE-EA-4-DackStation-Single-1000x605x900-Primary.js",
+        "position": [
+            893.211,
+            450,
+            10157.786
+        ]
+    },
+    {
+        "name": "HuiLiuHang1",
+        "url": "JSON/PE-EA-6-KurtzErsa-HOTFLOW320-1587x6590x1585-Primary.js",
+        "position": [
+            4688.21,
+            1075.794,
+            10157.721
+        ],
+        "rotate": [
+            0,
+            90,
+            0
+        ]
+    },
+    {
+        "name": "JieBoTai4",
+        "url": "JSON/PE-EA-4-DackStation-Single-1000x605x900-Primary.js",
+        "position": [
+            8483.211,
+            450,
+            10157.786
+        ]
+    },
+    {
+        "name": "AOI1",
+        "url": "JSON/PE-EA-7-0-White-1150x1200x1800-Primary.js",
+        "position": [
+            9583.211,
+            1172.5,
+            10157.786
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "ShangBanJi2",
+        "url": "JSON/PE-EA-1-YunJia-0-1800x970x1250-Primary.js",
+        "position": [
+            10783.211,
+            953.085,
+            10157.785
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "ShangBanJi3",
+        "url": "JSON/PE-EA-1-YunJia-0-1800x970x1250-Primary.js",
+        "position": [
+            -10165.32,
+            953.085,
+            2491.689
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "YingShuaJi2",
+        "url": "JSON/PE-EA-2-DEK-Horizon03iX-1340x1636x1467-Primary.js",
+        "position": [
+            -8588.409,
+            981,
+            2491.69
+        ]
+    },
+    {
+        "name": "SPI2",
+        "url": "JSON/PE-EA-3-Pemtron-TROI7700E-1945x1867x1995-1.js",
+        "position": [
+            -7295.821,
+            997.504,
+            2441.689
+        ]
+    },
+    {
+        "name": "JieBoTai5",
+        "url": "JSON/PE-EA-4-DackStation-Single-1000x605x900-Primary.js",
+        "position": [
+            -6185.819,
+            450,
+            2491.69
+        ]
+    },
+    {
+        "name": "DianJiaoJi2",
+        "url": "JSON/PE-EA-13-DP-1-1676x1706x2154-1.js",
+        "position": [
+            -5085.819,
+            1077.134,
+            2491.69
+        ]
+    },
+    {
+        "name": "JieBoTai6",
+        "url": "JSON/PE-EA-4-DackStation-Single-1000x605x900-Primary.js",
+        "position": [
+            -3985.819,
+            450,
+            2491.69
+        ]
+    },
+    {
+        "name": "TiePianJi2",
+        "url": "JSON/PE-EA-5-FuShi-2-2596x1931x2337-Primary.js",
+        "position": [
+            -2192.809,
+            1168.648,
+            2241.479
+        ]
+    },
+    {
+        "name": "JieBoTai7",
+        "url": "JSON/PE-EA-4-DackStation-Single-1000x605x900-Primary.js",
+        "position": [
+            -399.799,
+            450,
+            2491.69
+        ]
+    },
+    {
+        "name": "HuiLiuHang2",
+        "url": "JSON/PE-EA-6-KurtzErsa-HOTFLOW320-1587x6590x1585-Primary.js",
+        "position": [
+            3395.201,
+            1075.794,
+            2491.625
+        ],
+        "rotate": [
+            0,
+            90,
+            0
+        ]
+    },
+    {
+        "name": "JieBoTai8",
+        "url": "JSON/PE-EA-4-DackStation-Single-1000x605x900-Primary.js",
+        "position": [
+            7190.201,
+            450,
+            2491.69
+        ]
+    },
+    {
+        "name": "AOI2",
+        "url": "JSON/PE-EA-7-0-White-1150x1200x1800-Primary.js",
+        "position": [
+            8290.2,
+            1172.5,
+            2491.69
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "ShangBanJi4",
+        "url": "JSON/PE-EA-1-YunJia-0-1800x970x1250-Primary.js",
+        "position": [
+            9490.2,
+            953.085,
+            2491.69
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "ShangBanJi5",
+        "url": "JSON/PE-EA-1-YunJia-0-1800x970x1250-Primary.js",
+        "position": [
+            -12049.053,
+            953.085,
+            -7558.989
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "PengYingJi1",
+        "url": "JSON/PE-PCB-23-LC-1-1108x1554x1993-Primary.js",
+        "position": [
+            -10408.232,
+            996.832,
+            -7662.228
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "JieBoTai9",
+        "url": "JSON/PE-EA-4-DackStation-Single-605x500x900-4.js",
+        "position": [
+            -9401.995,
+            450,
+            -7546.927
+        ],
+        "rotate": [
+            0,
+            -90,
+            0
+        ]
+    },
+    {
+        "name": "ShangBanJi6",
+        "url": "JSON/PE-EA-1-YunJia-1-1500x985x1906-Primary.js",
+        "position": [
+            -8401.993,
+            953.085,
+            -7546.926
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo1",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1800x1749x1290-1.js",
+        "position": [
+            1475.178,
+            645.145,
+            -5025.49
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo2",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1800x1749x1290-1.js",
+        "position": [
+            3698.881,
+            645.145,
+            -5025.49
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo3",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1800x1749x1290-1.js",
+        "position": [
+            5498.881,
+            645.145,
+            -5025.49
+        ]
+    },
+    {
+        "name": "GuiZi1",
+        "url": "JSON/PR-LE-6-1-FilingCabinet-900x399x1850-Primary.js",
+        "position": [
+            7075,
+            925,
+            -5724.999
+        ]
+    },
+    {
+        "name": "GuiZi2",
+        "url": "JSON/PR-LE-6-1-FilingCabinet-900x399x1850-Primary.js",
+        "position": [
+            7975,
+            925,
+            -5724.999
+        ]
+    },
+    {
+        "name": "GuiZi3",
+        "url": "JSON/PR-LE-6-1-FilingCabinet-900x399x1850-Primary.js",
+        "position": [
+            9925,
+            925,
+            -5724.999
+        ]
+    },
+    {
+        "name": "GuiZi4",
+        "url": "JSON/PR-LE-6-1-FilingCabinet-900x399x1850-Primary.js",
+        "position": [
+            10825,
+            925,
+            -5724.999
+        ]
+    },
+    {
+        "name": "GuiZi5",
+        "url": "JSON/PR-LE-6-1-FilingCabinet-900x399x1850-Primary.js",
+        "position": [
+            11725,
+            925,
+            -5724.999
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo4",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1225x1533x1290-Primary.js",
+        "position": [
+            -12262.5,
+            645.145,
+            5974.51
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo5",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1225x1533x1290-Primary.js",
+        "position": [
+            -10787.5,
+            645.145,
+            5974.51
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo6",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1800x1749x1290-1.js",
+        "position": [
+            -7525,
+            645.145,
+            5974.51
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo7",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1800x1749x1290-1.js",
+        "position": [
+            -5725,
+            645.145,
+            5974.51
+        ]
+    },
+    {
+        "name": "GuiZi6",
+        "url": "JSON/PR-LE-6-1-FilingCabinet-900x399x1850-Primary.js",
+        "position": [
+            -4375,
+            925,
+            5337.034
+        ]
+    },
+    {
+        "name": "GuiZi7",
+        "url": "JSON/PR-LE-6-1-FilingCabinet-900x399x1850-Primary.js",
+        "position": [
+            -3475,
+            925,
+            5337.034
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo8",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1800x1749x1290-1.js",
+        "position": [
+            -1521.91,
+            645.145,
+            5974.51
+        ]
+    },
+    {
+        "name": "AOI3",
+        "url": "JSON/PE-EA-7-AOI-BTF-1407x1246x2412-Primary.js",
+        "position": [
+            4436.186,
+            1206.101,
+            5726.806
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo9",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1200x1671x1310-2.js",
+        "position": [
+            5765.172,
+            655,
+            5938.321
+        ]
+    },
+    {
+        "name": "DianNiaoZhuo10",
+        "url": "JSON/PR-LE-14-ZuHe-DianNaoZhuo-1800x1749x1290-1.js",
+        "position": [
+            7625.001,
+            645.145,
+            5899.51
+        ]
+    }
+]

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星德胜</title>
+    <!-- <link rel="stylesheet" href="css/codefont.css"> -->
+    <link rel="stylesheet" href="../../css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../../fonts/iconfont.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="../common/css/components.css" />
+
+    <script>
+        /**设置rem
+         * 需要放在样式修改之前，css文件前
+         */
+        (function () {
+            var _self = this;
+            _self.width = 1920;      //设置默认最大宽度
+            _self.fontSize = 100;   //默认字体大小
+            _self.widthProportion = function () {
+                var p = (document.body && document.body.clientWidth || document.getElementsByTagName("html")[0].offsetWidth) / _self.width;
+                return p > 1 ? 1 : p < 0.2 ? 0.2 : p;
+            };
+            _self.changePage = function () {
+                var a = _self.widthProportion() * _self.fontSize;
+                document.getElementsByTagName("html")[0].setAttribute("style", "font-size:" + a + "px !important");
+                if (a != parseFloat(window.getComputedStyle(document.documentElement)["fontSize"])) {
+                    document.getElementsByTagName("html")[0].setAttribute("style", "font-size:" + a / (parseFloat
+                        (window.getComputedStyle(document.documentElement)["fontSize"]) / a) + "px !important");
+                }
+            }
+            _self.changePage();
+            window.addEventListener('resize', function () {
+                _self.changePage();
+            }, false);
+        })();
+
+        // (function () {
+        //     setInterval(function () {
+        //         check()
+        //     }, 100);
+        //     var check = function () {
+        //         function doCheck(a) {
+        //             if (("" + a / a)["length"] !== 1 || a % 20 === 0) {
+        //                 (function () { }
+        //                 ["constructor"]("debugger")())
+        //             } else {
+        //                 (function () { }
+        //                 ["constructor"]("debugger")())
+        //             }
+        //             doCheck(++a)
+        //         }
+        //         try {
+        //             doCheck(0)
+        //         } catch (err) { }
+        //     };
+        //     check();
+        // })();
+    </script>
+
+    <script src="../../webGL/js/three.js"></script>
+    <script src="../../webGL/js/libs/tween.min.js"></script>
+    <!--摄像机-->
+    <script src="../../webGL/js/controls/OrbitControls.js"></script>
+    <!--检测支持_this文件-->
+    <script src="../../webGL/js/Detector.js"></script>
+    <script src="../../js/jquery-1.10.2.min.js"></script>
+    <!--滚动条-->
+    <script src="../../js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="../../js/jquery.mousewheel.min.js"></script>
+    <script src="../../js/jquery.transit.js"></script>
+    <script src="../../js/layer/layer.js"></script>
+    <script src="../../js/echarts.min.js"></script>
+
+    <script src="../../js/vue.js"></script>
+    <script src="../common/js/web-3d.js"></script>
+    <script src="../common/js/lodash.js"></script>
+
+    <!-- 组件 -->
+    <script src="../common/components/layout.js"></script>
+    <script src="../common/components/conterLayout.js"></script>
+    <script src="components/3dview.js"></script>
+    <script src="../common/components/head.js"></script>
+    <script src="../common/components/cardType2.js"></script>
+    <script src="../common/components/cardType3.js"></script>
+    <script src="../common/components/echartLoop.js"></script>
+    <script src="../common/components/labelChart2.js"></script>
+    <script src="../common/components/listTable.js"></script>
+    <script src="../common/components/proListTable.js"></script>
+    <script src="../common/components/upBox.js"></script>
+    <script src="../common/components/upArroeBox.js"></script>
+    <script src="../common/components/model3d.js"></script>
+    <script src="../common/components/listLink.js"></script>
+    <script src="../common/components/barCheart.js"></script>
+    <script src="../common/components/pieCheartStat.js"></script>
+    <script src="../common/components/listTab.js"></script>
+    <script src="../common/components/stateSign.js"></script>
+    <script src="../common/components/textLableBox.js"></script>
+    <script src="../common/components/gaugeChart.js"></script>
+</head>
+
+<body>
+    <div id="app" style="height: 100%;width: 100%;">
+        <layout>
+            <template slot="head">
+                <head-top :headr="headr"></head-top>
+            </template>
+            <template slot="webGl">
+                <div style="height: 100%;width: 100%;">
+                    <transition name="fade">
+                        <web3d v-on:clickmodel="click3dModel" :propdata="D3"></web3d>
+                    </transition>
+                </div>
+            </template>
+            <template slot="conter">
+                <conter-layout :layout="layout3D">
+                    <template slot="block1">
+                        <transition name="shiftLeft">
+                            <card-type3>
+                                <list-link :propdata="link" v-on:clicklink="clicklink"></list-link>
+                            </card-type3>
+                        </transition>
+                    </template>
+                    <template slot="block2">
+                        <transition name="shiftLeft2">
+                            <card-type2 title="车间实况 >>">
+                                <pro-list-table :propdata="A01"></pro-list-table>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block3">
+                        <transition name="shiftRight">
+                            <card-type2 title="SMT班次产能 >>">
+                                <div style="height:100%;width:100%">
+                                    <div class="switchBox" style="float:right;margin-right:0.2rem">
+                                        <span :class="switchCalsee==1?'active':''"
+                                            v-on:click="setSwitchCalsee(1)">白班</span><span
+                                            :class="switchCalsee==2?'active':''"
+                                            v-on:click="setSwitchCalsee(2)">夜班</span>
+                                    </div>
+                                    <div style="height: calc(100% - 0.38rem);width:100%;float:left"
+                                        v-show="switchCalsee==1">
+                                        <bar-cheart :propdata="A03" :change-init="switchCalsee==1"></bar-cheart>
+                                    </div>
+                                    <div style="height: calc(100% - 0.38rem);width:100%;float:left"
+                                        v-show="switchCalsee==2">
+                                        <bar-cheart :propdata="A04" :change-init="switchCalsee==2"></bar-cheart>
+                                    </div>
+                                </div>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block4">
+                        <transition name="shiftRight2">
+                            <card-type2 title="不良TOP3项 >>">
+                                <div style="height:100%;width:50%;float:left" v-for="(val,item) in A05">
+                                    <pie-cheart-stat :propdata="val"></pie-cheart-stat>
+                                </div>
+                                <label-chart2 :propdata="A05" :isloop="true"></label-chart2>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block5">
+                        <transition name="shiftBottom">
+                            <card-type2 :long=true title="警告提示 >>" v-on:unfold="cardunfold">
+                                <list-table :propdata="A02" :flex="layout3D[4].col == 6"></list-table>
+                            </card-type2>
+                        </transition>
+                    </template>
+                </conter-layout>
+            </template>
+        </layout>
+
+        <transition name="fade">
+            <up-box v-show="upBox" v-on:close="upBoxClose" title="">
+                <model3d v-if="upBox" :propsdata="upBoxModelData"></model3d>
+            </up-box>
+        </transition>
+
+        <transition name="fade">
+            <up-arroe-box v-show="upArroeBox" :title="upArroeBoxTitle" V-on:close="upArroeBoxClose">
+                <list-tab :tabs='["物料产前准备"]' v-show="upArroeBoxTitle=='生产计划'">
+                    <template slot="1">
+                        <div style="height:100%;width:100%;padding: 0.2rem 0">
+                            <list-table :propdata="A07"></list-table>
+                        </div>
+                    </template>
+                </list-tab>
+                <div class="binaryBox" v-show="upArroeBoxTitle=='生产品质'">
+                    <div>
+                        <div class="lableBox"><span class="lable">白班</span></div>
+                        <div class="content">
+                            <bar-cheart :propdata="A08" :change-init="upArroeBoxTitle=='生产品质'"></bar-cheart>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="lableBox"><span class="lable">夜班</span></div>
+                        <div class="content">
+                            <bar-cheart :propdata="A09" :change-init="upArroeBoxTitle=='生产品质'"></bar-cheart>
+                        </div>
+                    </div>
+                </div>
+                <div class="EAMExBox" v-show="upArroeBoxTitle=='EAM'">
+                    <div class="tipTopLable">
+                        <state-sign :icon="true" state="error">{{EAMData.error}}</state-sign>
+                        <state-sign :icon="true" state="warning">{{EAMData.warning}}</state-sign>
+                        <state-sign :icon="true" state="normal">{{EAMData.normal}}</state-sign>
+                    </div>
+                    <div class="centerBox" ref="EAMExBoxmessageList">
+                        <div class="EAMExListBox" :style="'width:'+ getEAMExBoxWith">
+                            <div v-for="(val,item) in EAMData.listData" :key="item">
+                                <div>
+                                    <text-lable-box :propdata="val"></text-lable-box>
+                                </div>
+                                <div>
+                                    <gauge-chart :change-init="upArroeBoxTitle=='EAM'" :propdata="val.chart">
+                                    </gauge-chart>
+                                </div>
+                                <div>
+                                    <img :src="val.image" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </up-arroe-box>
+        </transition>
+    </div>
+</body>
+<script>
+    $(function () {
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                headr: {
+                    title: "星德胜SMT事业部智能工厂管控中心",
+                    logo1Url: "../common/images/Pangus-logo.png",
+                    logo1Ur2: "images/logo.png",
+                },
+                name: '1',
+                upBox: false,
+                upArroeBox: false,
+                upArroeBoxTitle: "",
+                layout3D: [
+                    {
+                        name: "block1",
+                        col: 6,
+                        cor: 2,
+                        top: 0,
+                        left: 0
+                    },
+                    {
+                        name: "block2",
+                        col: 6,
+                        cor: 12,
+                        top: 2,
+                        left: 0
+                    },
+                    {
+                        name: "block3",
+                        col: 6,
+                        cor: 14,
+                        top: 0,
+                        left: 18
+                    },
+                    {
+                        name: "block4",
+                        col: 6,
+                        cor: 10,
+                        top: 14,
+                        left: 18
+                    },
+                    {
+                        name: "block5",
+                        col: 18,
+                        cor: 10,
+                        top: 14,
+                        left: 0
+                    },
+                ],
+                link: [
+                    {
+                        name: "生产计划",
+                        image: "images/plan_icon.png",
+                        href: "baidu.com",
+                    },
+                    {
+                        name: "生产品质",
+                        image: "images/quality_icon.png",
+                        href: "baidu.com",
+                    },
+                    {
+                        name: "EAM",
+                        image: "images/eam_icon.png",
+                        href: "baidu.com",
+                    }
+                ],
+                upBoxModelData: {
+                    elem: '',
+                    data: {
+                        devText: [
+                            {
+                                name: "设备名称",
+                                value: "xxxxxx"
+                            },
+                            {
+                                name: "设备型号",
+                                value: "YG210"
+                            },
+                            {
+                                name: "操机人员",
+                                value: "PG231255"
+                            },
+                            {
+                                name: "设备程序",
+                                value: "ST350QW-V2.0"
+                            },
+                            {
+                                name: "设备抛料",
+                                value: "0.5%"
+                            },
+                            {
+                                name: "贴装数量",
+                                value: "570PCS"
+                            },
+                        ]
+                    }
+                },
+                switchCalsee: 1,
+
+                D3: [],
+                A01: [
+                    {
+                        name: "SMT-A",
+                        state: "warning",
+                        value: 100,
+                    },
+                ],
+                A02: {
+                    colName: ["工单号", "成品名称", "发生时间", "不良信息描述", "当前处理人", "状态"],
+                    colModel: [
+                        {
+                            name: "A02_00",
+                            widthPer: 15,
+                            hide: false,
+                            flexd: true,
+                        },
+                        {
+                            name: "A02_01",
+                            widthPer: 15,
+                            hide: false,
+                        },
+                        {
+                            name: "A02_02",
+                            widthPer: 20,
+                            hide: false,
+                        },
+                        {
+                            name: "A02_03",
+                            widthPer: 35,
+                            hide: false,
+                        },
+                        {
+                            name: "A02_04",
+                            widthPer: 15,
+                            hide: false,
+                        },
+                        {
+                            name: "A02_05",
+                            width: 120,
+                            hide: false,
+                            flexd: true,
+                            formatterClass: function (val) {
+                                return val
+                            },
+                            formatterText: function (val) {
+                                if (val == 'warning') {
+                                    return "异常"
+                                }
+                                return "处理中"
+                            },
+                        }
+
+                    ],
+                    colData: [
+                        {
+                            A02_00: "123",
+                            A02_01: "123",
+                            A02_02: "123",
+                            A02_03: "123",
+                            A02_04: "123",
+                            A02_05: "123",
+                        }
+                    ]
+                },
+
+                A03: [
+                    {
+                        name: "--",
+                        value: 0,
+                    },
+                    {
+                        name: "--",
+                        value: 0,
+                    },
+                    {
+                        name: "--",
+                        value: 0,
+                    }
+                ],
+                A04: [
+                    {
+                        name: "--",
+                        value: 0,
+                    },
+                    {
+                        name: "--",
+                        value: 0,
+                    },
+                    {
+                        name: "--",
+                        value: 0,
+                    }
+                ],
+                A05: [
+                    {
+                        title: "SMT",
+                        data: [
+                            {
+                                name: "--",
+                                value: 0,
+                            },
+                            {
+                                name: "--",
+                                value: 0,
+                            },
+                            {
+                                name: "--",
+                                value: 0,
+                            }
+                        ]
+                    },
+                    {
+                        title: "DIP",
+                        data: [
+                            {
+                                name: "--",
+                                value: 0,
+                            },
+                            {
+                                name: "--",
+                                value: 0,
+                            },
+                            {
+                                name: "--",
+                                value: 0,
+                            },
+                            {
+                                name: "--",
+                                value: 0,
+                            }
+                        ]
+                    },
+                ],
+                A07: {
+                    colName: ["工单编码", "成品名称", "生产线编码", "备料状态", "领料状态", "首套上料状态"],
+                    colModel: [
+                        {
+                            name: "A07_00",
+                            widthPer: 33.33,
+                            hide: false,
+                            flexd: true,
+                        },
+                        {
+                            name: "A07_01",
+                            widthPer: 33.33,
+                            hide: false,
+                        },
+                        {
+                            name: "A07_02",
+                            widthPer: 33.33,
+                            hide: false,
+                        },
+                        {
+                            name: "A07_03",
+                            width: 120,
+                            hide: false,
+                            flexd: true,
+                            formatterClass: function (val) {
+                                return val
+                            },
+                            formatterText: function (val) {
+                                if (val == 'warning') {
+                                    return "未备料"
+                                }
+                                return "已完成"
+                            },
+                        },
+                        {
+                            name: "A07_04",
+                            width: 120,
+                            hide: false,
+                            flexd: true,
+                            formatterClass: function (val) {
+                                return val
+                            },
+                            formatterText: function (val) {
+                                if (val == 'warning') {
+                                    return "异常"
+                                }
+                                return "处理中"
+                            },
+                        },
+                        {
+                            name: "A07_05",
+                            width: 180,
+                            hide: false,
+                            flexd: true,
+                            formatterClass: function (val) {
+                                return val
+                            },
+                            formatterText: function (val) {
+                                if (val == 'warning') {
+                                    return "进行中"
+                                }
+                                return "处理已完成中"
+                            },
+                        }
+
+                    ],
+                    colData: [
+                        {
+                            A07_00: "--",
+                            A07_01: "--",
+                            A07_02: "--",
+                            A07_03: "--",
+                            A07_04: "--",
+                            A07_05: "--",
+                        }
+                    ]
+                },
+                A08: [
+                    {
+                        name: "--",
+                        value: 0,
+                    },
+                    {
+                        name: "--",
+                        value: 0,
+                    },
+                    {
+                        name: "--",
+                        value: 0,
+                    }
+                ],
+                A09: [
+                    {
+                        name: "--",
+                        value: 0,
+                    },
+                    {
+                        name: "--",
+                        value: 0,
+                    },
+                    {
+                        name: "--",
+                        value: 0,
+                    }
+                ],
+                EAMData: {
+                    error: 8,
+                    warning: 12,
+                    normal: 30,
+                    listData: [
+                        {
+                            name: "模治具01",
+                            state: "normal",
+                            list: [
+                                {
+                                    name: "状态",
+                                    value: "正常",
+                                    state: "normal"
+                                },
+                                {
+                                    mame: "模治具名称",
+                                    value: "MZ-01",
+                                },
+                                {
+                                    mame: "工单编码",
+                                    value: "GX-01",
+                                },
+                                {
+                                    mame: "工序名称",
+                                    value: "工序1",
+                                },
+                                {
+                                    mame: "上线时间",
+                                    value: "2020-02-27 14:15:28",
+                                }
+                            ],
+                            chart: 0,
+                            image: "",
+                        }
+                    ]
+
+                }
+            },
+            mounted: function () {
+                let _this = this;
+
+                $(this.$refs.EAMExBoxmessageList).mCustomScrollbar({
+                    theme: 'minimal',
+                    setLeft: 0,
+                    scrollInertia: 550,
+                    mouseWheelPixels: 220,
+                    setHeight: "100%",
+                    axis: "x",
+                });
+
+                //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
+                _this.socketUrl = 'ws://127.0.0.1:8892/biShow/webSocket';
+                _this.socket = null;
+                if (_this.socket != null) {
+                    _this.socket.close();
+                    _this.socket = null;
+                }
+                _this.socket = new WebSocket(_this.socketUrl);
+                //打开事件
+                _this.socket.onopen = function () {
+                    console.log("websocket已打开");
+                };
+                //获得消息事件
+                _this.socket.onmessage = function (msg) {
+                    //var serverMsg = "收到服务端信息：" + msg.data;
+                    let data = $.parseJSON(msg.data);
+                    if (data.data && data.data.length) {
+                        _this.controller(data.data)
+                    }
+                };
+                //关闭事件
+                _this.socket.onclose = function () {
+                    console.log("websocket已关闭");
+                };
+                //发生了错误事件
+                _this.socket.onerror = function () {
+                    console.log("websocket发生了错误");
+                };
+            },
+            methods: {
+                setSwitchCalsee: function (num) {
+                    this.switchCalsee = num
+                },
+                clicklink: function (name) {
+                    this.upArroeBoxTitle = name;
+                    this.upArroeBox = true;
+                },
+                //数据控制器
+                controller: function (dataList) {
+                    console.log(dataList)
+                    let _this = this;
+                    for (let i = 0; i < dataList.length; i++) {
+                        let data = dataList[i].dataValue;
+                        let name = dataList[i].dataName;
+
+                        switch (name) {
+                            case '3D':
+                                if (data.length) _this.D3 = data[0].lineChildrens;
+                                break;
+                            case 'A01'://车间实况
+                                if (data.length) {
+                                    let dataList = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A01_00;
+                                        d.state = data[i].A01_01;
+                                        d.value = data[i].A01_02;
+                                        dataList.push(d);
+                                    }
+                                    _this.A01 = dataList;
+                                }
+                                break;
+                            case 'A02'://警告提示
+                                if (data.length) {
+                                    _this.A02.colData = data;
+                                }
+                                break;
+                            case 'A03'://SMT白班产能
+                                if (data.length) {
+                                    let dataList = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A03_00;
+                                        d.value = data[i].A03_01;
+                                        dataList.push(d);
+                                    }
+
+                                    _this.A03 = dataList;
+                                }
+                                break;
+                            case 'A04'://SMT夜班产能
+                                if (data.length) {
+                                    if (data.length) {
+                                        let dataList = [];
+                                        for (let i = 0; i < data.length; i++) {
+                                            let d = {};
+                                            d.name = data[i].A04_00;
+                                            d.value = data[i].A04_01;
+                                            dataList.push(d);
+                                        }
+                                        _this.A04 = dataList;
+                                    }
+                                }
+                                break;
+                            case 'A05'://上周不良TOP3项-SMT
+                                if (data.length) {
+                                    let dataList = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A05_00;
+                                        d.value = data[i].A05_01;
+                                        dataList.push(d);
+                                    }
+                                    _this.A05[0].data = dataList;
+                                }
+                                break;
+                            case 'A06'://上周不良TOP3项-DIP
+                                if (data.length) {
+                                    let dataList = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A06_00;
+                                        d.value = data[i].A06_01;
+                                        dataList.push(d);
+                                    }
+                                    _this.A05[1].data = dataList;
+                                }
+                                break;
+                            case 'A07'://物料产前准备
+                                if (data.length) {
+                                    _this.A07.colData = data;
+                                }
+                                break;
+                            case 'A08'://白班直通率
+                                if (data.length) {
+                                    let dataList = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A08_00;
+                                        d.value = data[i].A08_01;
+                                        dataList.push(d);
+                                    }
+
+                                    _this.A08 = dataList;
+                                }
+                                break;
+                            case 'A09'://夜班直通率
+                                if (data.length) {
+                                    let dataList = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A09_00;
+                                        d.value = data[i].A09_01;
+                                        dataList.push(d);
+                                    }
+
+                                    _this.A09 = dataList;
+                                }
+                                break;
+                            case 'A10'://EAM
+                                if (data.length) {
+                                    let error = 0;
+                                    let warning = 0;
+                                    let normal = 0;
+                                    let lisData = [];
+                                    let chart = 0;
+                                    function getStateName(state) {
+                                        if (state == "normal") {
+                                            chart = 0;
+                                            normal++;
+                                            return "正常"
+                                        } else if (state == "warning") {
+                                            chart = 5;
+                                            warning++;
+                                            return "保养预警"
+                                        } else if (state == "error") {
+                                            chart = 10;
+                                            error++;
+                                            return "报废预警"
+                                        }
+                                    };
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A10_00;
+                                        d.state = data[i].A10_01;
+                                        d.list = [
+                                            {
+                                                name: "状态",
+                                                value: getStateName(data[i].A10_01),
+                                                state: data[i].A10_01,
+                                            },
+                                            {
+                                                mame: "模治具编码",
+                                                value: data[i].A10_02,
+                                            },
+                                            {
+                                                mame: "工单编码",
+                                                value: data[i].A10_03,
+                                            },
+                                            {
+                                                mame: "工序名称",
+                                                value: data[i].A10_04,
+                                            },
+                                            {
+                                                mame: "上线时间",
+                                                value: data[i].A10_05,
+                                            }
+                                        ]
+                                        lisData.push(d);
+                                    }
+                                    this.EAMData.error = error;
+                                    this.EAMData.warning = warning;
+                                    this.EAMData.normal = normal;
+                                    this.EAMData.chart = chart;
+                                    this.EAMData.lisData = lisData;
+                                }
+                                break;
+
+                        }
+                    }
+                },
+                //控制3d看板主板收放
+                cardunfold: function (val) {
+                    if (!val) {
+                        this.layout3D[4].col = 6
+                    } else {
+                        this.layout3D[4].col = 18
+                    }
+                },
+
+                //关闭3d设备弹出窗
+                upBoxClose: function () {
+                    this.upBox = false
+                },
+                //点击3d设备模型
+                click3dModel: function (e) {
+                    this.upBoxModelData.elem = e;
+                    this.upBox = true
+                },
+                upArroeBoxClose: function (e) {
+                    this.upArroeBox = false;
+                },
+
+            },
+            computed: {
+                //获取 EAMExBox 内容宽度
+                getEAMExBoxWith: function () {
+                    let num = 0;
+                    if (this.EAMData && this.EAMData.listData && this.EAMData.listData.length) {
+                        num = this.EAMData.listData.length * 300 + 20;
+                    }
+                    return num + "px";
+                }
+            },
+        });
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,1946 @@
+@charset "UTF-8";
+@import "reset.css";
+html, body {
+  display: block;
+  width: 100%;
+  min-width: 1200px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #131935;
+  content-zooming: none;
+  -ms-content-zooming: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul, li {
+  list-style-type: none;
+  list-style: none;
+}
+
+.bgImg {
+  display: block;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+}
+
+.text-ellipsis, .textLableBox .textListBox .listText .text, .textLableBox .textListBox .listText .lable, .textLableBox .title, .pieCheartStat .statTable .statTableListBox ul > li > span, .pieCheartStat .title, .lisLink .lisLinkBox > li > a > p, .proListTable .proListTables > li .state, .proListTable .proListTables > li > p, .upArroeBox > .lightPanel > .title, .humiture .content > div .align-play > div:last-child, .humiture .content > div .align-play > div:first-child, .devInfo2 .content .devCenter .rotateProBox .rotatePro > p, .devInfo2 .content .devCenter .devCenterText .devTextBox .listBox .text, .devInfo2 .content .devCenter .devCenterText .devTextBox .listBox .name, .devInfo2 .content .hint, .devInfo2 .top > div .text, .devInfo2 .top > p, .devInfo .listText .devText .stateBox span, .devInfo .listText .devText .name, .listTableBox .listTableCenter ul li > div > div, .listTableBox .listTableCenter ul li > div, .listTableBox .listTableHaed > div, .qualityStat .lableText, .labelChart2 > div > div > p, .labelChart1 .listBox .value, .labelChart1 .listBox .name, .headCenterBox > div .text, .headCenterBox > div .title, .headCenterBox > div {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layout {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.layout .headBox {
+  width: 100%;
+  height: 0.98rem;
+  min-height: 62px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(19, 25, 53, 0.8);
+  pointer-events: none;
+}
+.layout .webGlBox {
+  height: 100%;
+  width: 100%;
+}
+.layout .webGlBox > div {
+  height: 100%;
+  width: 100%;
+}
+.layout .conterBox {
+  width: 100%;
+  height: calc(100% - 0.98rem);
+  max-height: calc(100% - 62px);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+.layout .conterBox .conterLayout {
+  height: 100%;
+  width: calc(100% - 20px);
+  margin-left: 20px;
+  position: relative;
+  pointer-events: none;
+}
+.layout .conterBox .conterLayout > .itemConter {
+  pointer-events: none;
+  padding-right: 20px;
+  box-sizing: border-box;
+  transition: all 0.8s;
+}
+.layout .conterBox .conterLayout > .itemConter > * {
+  pointer-events: auto;
+}
+
+.head {
+  height: 0.98rem;
+  width: 100%;
+  padding: 0;
+  background-color: transparent;
+}
+
+.headCenterBox {
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/01.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  overflow: hidden;
+  background-color: transparent;
+}
+.headCenterBox.title-bg1 {
+  background-image: url("../images/title-bg1.png");
+}
+.headCenterBox > div {
+  background-color: transparent;
+  height: 100%;
+  width: 33.33%;
+  float: left;
+  position: relative;
+  overflow: unset !important;
+  z-index: 9;
+  pointer-events: none;
+}
+.headCenterBox > div > * {
+  pointer-events: auto;
+}
+.headCenterBox > div * {
+  pointer-events: auto;
+}
+.headCenterBox > div:nth-of-type(2) {
+  z-index: 1;
+}
+.headCenterBox > div .title {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 0.96rem;
+  padding: 0 0.4rem;
+  font-size: 0.4rem;
+  text-align: center;
+  font-size: 0.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  color: #21baff;
+}
+.headCenterBox > div .text {
+  height: 100%;
+  width: 100%;
+  text-align: right;
+  padding: 0 0.1rem;
+  float: left;
+  line-height: 0.68rem;
+  font-size: 0.24rem;
+  color: #16b7c5;
+}
+.headCenterBox > div .text > span {
+  margin-left: 0.16rem;
+}
+.headCenterBox > div .logo {
+  display: block;
+  height: 0.38rem;
+  overflow: hidden;
+  float: left;
+  margin: 0.15rem 0.15rem 0 0.15rem;
+  padding: 0 0.05rem;
+}
+.headCenterBox > div .logo img {
+  display: block;
+  height: 80%;
+  width: auto;
+}
+.headCenterBox > div .btn-left, .headCenterBox > div .btn-right {
+  position: absolute;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  width: 1.6rem;
+  height: 0.6rem;
+  color: #fff;
+  text-align: center;
+  box-shadow: none;
+  background-color: transparent;
+  border: 0;
+  background-position: center;
+  bottom: 0.07rem;
+  outline: none;
+}
+.headCenterBox > div .btn-left:active, .headCenterBox > div .btn-right:active {
+  opacity: 0.6;
+}
+.headCenterBox > div .btn-left {
+  background-image: url(../images/btn-left.png);
+  right: -0.8rem;
+}
+.headCenterBox > div .btn-right {
+  background-image: url(../images/btn-right.png);
+  left: -0.8rem;
+}
+.headCenterBox.title-02 {
+  background-image: url(../images/title-02.png);
+}
+.headCenterBox .page-change {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  text-align: right;
+  padding-right: 0.3rem;
+}
+.headCenterBox .page-change button {
+  border: 0;
+  box-shadow: none;
+  background-color: transparent;
+  background-image: url("../images/page-button.png");
+  width: 1.3rem;
+  height: calc( 1.3rem * 28 / 114 );
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+.headCenterBox .page-change button:hover, .headCenterBox .page-change button:active, .headCenterBox .page-change button.active {
+  background-image: url("../images/page-button-hover.png");
+  color: #00f9ff;
+}
+
+.cardTitle {
+  width: 50%;
+  font-size: 0.2rem;
+  color: #ffffff;
+  padding: 0;
+  position: absolute;
+  height: 0.3rem;
+  line-height: 0.3rem;
+  text-align: center;
+  margin: 0;
+  top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  z-index: 100;
+}
+
+.cardBox {
+  height: calc(100% - 20px);
+  width: 100%;
+  position: relative;
+}
+.cardBox .cardTitle {
+  width: calc(100% - 220px);
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.cardBox .cardCenter {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  color: #ffffff;
+  font-size: 0.2rem;
+  transition: width 0.5s;
+  background-repeat: no-repeat;
+  background-position: 0 0, 0 56px, 0 100%;
+  background-size: 100% 56px, 100% calc(100% - 121px), 100% 66px;
+}
+.cardBox .cardCenter:before {
+  display: block;
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  border-width: 131px 89px 142px 250px !important;
+  border-style: solid;
+  border-color: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-clip: padding-box;
+  border-width: 53px 102px 57px 110px !important;
+  border-image-source: url(../images/mainFromBg-2.png);
+  border-image-slice: 61 150 82 164;
+  background-image: url(../images/mainFromContentBg-2.png);
+}
+.cardBox .cardCenter .cardCenterBox {
+  width: calc(100% - 8px);
+  margin: 0 auto;
+  margin-top: 38px;
+  height: calc(100% - 42px);
+  position: relative;
+  z-index: 100;
+}
+.cardBox.long .cardTitle {
+  width: 180px;
+  left: 244px;
+  transform: translate(-50%, 0);
+}
+.cardBox.long .cardCenter:before {
+  border-width: 64px 63px 64px 339px !important;
+  border-image-source: url(../images/mainFromBg-3.png);
+  border-image-slice: 64 63 64 339;
+  background-image: url(../images/mainFromContentBg-3.png);
+}
+
+.cardArrowBox {
+  height: calc(100% - 20px);
+  width: 100%;
+  position: relative;
+}
+.cardArrowBox .cardTitle {
+  width: calc(100% - 52px);
+  top: 34px;
+  left: 26px;
+  z-index: 100;
+  text-align: left;
+}
+.cardArrowBox .cardCenter {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  color: #ffffff;
+  font-size: 0.2rem;
+  transition: width 0.5s;
+  background-repeat: no-repeat;
+  background-position: 0 0, 0 56px, 0 100%;
+  background-size: 100% 56px, 100% calc(100% - 121px), 100% 66px;
+  background-image: url(../images/mainFrom1.png), url(../images/mainFrom2.png), url(../images/mainFrom3.png);
+}
+.cardArrowBox .cardCenter .cardCenterBox {
+  width: calc(100% - 24px);
+  margin: 0 auto;
+  margin-top: 78px;
+  height: calc(100% - 88px);
+  position: relative;
+  z-index: 100;
+}
+.cardArrowBox.long .cardCenter {
+  background-image: none;
+}
+.cardArrowBox.long:before {
+  display: block;
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 1;
+  border-width: 131px 89px 142px 250px !important;
+  border-style: solid;
+  border-color: transparent;
+  border-image-source: url(../images/mainFromBg.png);
+  border-image-slice: 131 89 142 250;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../images/mainFromContentBg.png) repeat;
+  background-clip: padding-box;
+}
+.cardArrowBox.long .arrow {
+  display: block;
+  position: absolute;
+  width: 31px;
+  height: calc( 100% - 152px );
+  background: url(../images/mainFromArrow.png) center center no-repeat;
+  right: -17px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9;
+}
+.cardArrowBox.long .arrow:after, .cardArrowBox.long .arrow:before {
+  content: "";
+  display: block;
+  background: url(../images/mainFrom4-1.png) repeat-y left center;
+  width: 13px;
+  height: calc( 50% - 36px);
+  position: absolute;
+  left: 1px;
+  z-index: 1;
+}
+.cardArrowBox.long .arrow:after {
+  top: 0;
+}
+.cardArrowBox.long .arrow:before {
+  bottom: 0;
+}
+.cardArrowBox.long .arrow i {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  left: 33%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-width: 13.5px 15px 13.5px 0;
+  border-color: transparent #16b6c5 transparent transparent;
+  cursor: pointer;
+}
+.cardArrowBox.long .arrow i.flex {
+  border-width: 13.5px 0 13.5px 15px;
+  border-color: transparent transparent transparent #16b6c5;
+}
+
+.cardType3 {
+  height: calc(100% - 20px);
+  width: 100%;
+  position: relative;
+}
+.cardType3 .cardCenter {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  color: #ffffff;
+  font-size: 0.2rem;
+  transition: width 0.5s;
+}
+.cardType3 .cardCenter:before {
+  display: block;
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-clip: padding-box;
+  border-width: 20px 20px 20px 20px !important;
+  border-image-source: url(../images/06-1.png);
+  border-image-slice: 20 20 20 20;
+  background-image: url(../images/mainFromContentBg-2.png);
+}
+.cardType3 .cardCenter .cardCenterBox {
+  width: calc(100% - 16px);
+  margin: 0 auto;
+  margin-top: 10px;
+  height: calc(100% - 20px);
+  position: relative;
+  z-index: 100;
+}
+
+.shiftLeft-enter-active, .shiftLeft-leave-active {
+  left: 0;
+  transition: left 0.4s;
+}
+
+.shiftLeft-enter, .shiftLeft-leave-to {
+  left: -400px;
+}
+
+.shiftLeft2-enter-active, .shiftLeft2-leave-active {
+  left: 0;
+  transition: left 0.5s;
+}
+
+.shiftLeft2-enter, .shiftLeft2-leave-to {
+  left: -400px;
+}
+
+.shiftRight-enter-active, .shiftRight-leave-active {
+  left: 0;
+  transition: left 0.4s;
+}
+
+.shiftRight-enter, .shiftRight-leave-to {
+  left: 400px;
+}
+
+.shiftRight2-enter-active, .shiftRight2-leave-active {
+  left: 0;
+  transition: left 0.5s;
+}
+
+.shiftRight2-enter, .shiftRight2-leave-to {
+  left: 400px;
+}
+
+.shiftBottom-enter-active, .shiftBottom-leave-active {
+  top: 0;
+  transition: top 0.6s;
+}
+
+.shiftBottom-enter, .shiftBottom-leave-to {
+  top: 400px;
+}
+
+.shiftTop-enter-active, .shiftTop-leave-active {
+  top: 0;
+  transition: top 0.6s;
+}
+
+.shiftTop-enter, .shiftTop-leave-to {
+  top: -400px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  opacity: 1;
+  transition: opacity 0.6s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.opacity_0 {
+  opacity: 0;
+}
+
+.labelChart1 {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  /*垂直居中*/
+}
+.labelChart1 > div {
+  flex: 0 0 100%;
+}
+.labelChart1 .listBox {
+  display: block;
+  width: 100%;
+  height: 55px;
+  padding: 5px 0.2rem;
+  overflow: hidden;
+}
+.labelChart1 .listBox .name {
+  display: block;
+  height: 100%;
+  width: 30%;
+  float: left;
+  font-size: 0.16rem;
+  text-align: center;
+  background-color: #d5d5d5;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 45px;
+  font-weight: 600;
+  font-size: 0.16rem;
+  color: #444;
+}
+.labelChart1 .listBox .value {
+  display: block;
+  float: left;
+  height: 100%;
+  line-height: 100%;
+  float: left;
+  font-size: 0.16rem;
+  width: calc(70% - 11px);
+  background-color: #177497;
+  text-indent: 20px;
+  color: #ffffff;
+  line-height: 45px;
+}
+
+.labelChart2 {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.labelChart2 > div {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.labelChart2 > div > div {
+  display: block;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+}
+.labelChart2 > div > div > p {
+  display: block;
+  width: 100%;
+  height: 0.68rem;
+  line-height: 0.68rem;
+  text-align: center;
+}
+.labelChart2 > div > div > span {
+  background-image: url(../images/border.png);
+  background-size: 100% 100%;
+  height: calc( 100% - 1.06rem);
+  line-height: calc( 100% - 1.06rem);
+  margin-top: 0.1rem;
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.labelChart2 > div > div:nth-child(1) > span {
+  background-color: #db8546;
+}
+.labelChart2 > div > div:nth-child(2) > span {
+  background-color: #2278ea;
+}
+.labelChart2 > div > div:nth-child(3) > span {
+  background-color: #6acefb;
+}
+.labelChart2 > div > div:nth-child(4) > span {
+  background-color: #db8546;
+}
+.labelChart2 > div > div:nth-child(5) > span {
+  background-color: #2278ea;
+}
+.labelChart2 > div > div:nth-child(6) > span {
+  background-color: #6acefb;
+}
+
+.labelChart3 {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.labelChart3 > div {
+  display: block;
+  width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 0.2rem;
+}
+.labelChart3 > div .listBox {
+  padding: 0.05rem 0;
+  overflow: hidden;
+}
+.labelChart3 > div .listBox > div {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(34, 89, 163, 0.3);
+  padding: 0.1rem;
+}
+.labelChart3 > div .listBox > div > div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #2259a3;
+  background-image: url(../images/border1.png);
+  background-size: 100% 100%;
+  justify-content: center;
+}
+.labelChart3 > div .listBox > div > div > p {
+  height: 0.8rem;
+  line-height: 0.86rem;
+  font-size: 0.16rem;
+}
+.labelChart3 > div .listBox > div > div > span {
+  height: 0.8rem;
+  line-height: 0.8rem;
+  font-size: 0.28rem;
+  padding-left: 0.1rem;
+  color: #22ffff;
+}
+
+.qualityStat {
+  height: 100%;
+  width: 100%;
+}
+.qualityStat .lableText {
+  display: block;
+  width: calc(100% - 0.4rem);
+  height: 40px;
+  background-color: #333d46;
+  text-align: center;
+  line-height: 40px;
+  color: #ffffff;
+  margin: 0 auto;
+  font-size: 0.14rem;
+}
+.qualityStat .qualityStatCenter {
+  height: calc(100% - 40px);
+  width: 100%;
+  position: relative;
+}
+.qualityStat .qualityStatEchart {
+  display: block;
+  height: 380px;
+  width: 420px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.listTableBox {
+  width: 100%;
+  height: 100%;
+  padding: 0 0.2rem;
+  font-size: 0.2rem;
+}
+.listTableBox .listTableHaed {
+  background: #2259a3;
+  color: #ffffff;
+  height: 42px;
+  line-height: 42px;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+}
+.listTableBox .listTableHaed > div {
+  float: left;
+  height: 42px;
+  line-height: 42px;
+  transition: width 0.8s;
+}
+.listTableBox .listTableHaed > div > div {
+  height: 100%;
+  width: 100%;
+  padding-left: 0.2rem;
+}
+.listTableBox .listTableCenter {
+  display: block;
+  width: 100%;
+  height: calc(100% - 46px);
+}
+.listTableBox .listTableCenter > div {
+  height: 100%;
+}
+.listTableBox .listTableCenter ul {
+  height: 100%;
+}
+.listTableBox .listTableCenter ul li {
+  width: 100%;
+  cursor: pointer;
+  overflow: hidden;
+}
+.listTableBox .listTableCenter ul li:nth-child(2n+1) {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.listTableBox .listTableCenter ul li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.listTableBox .listTableCenter ul li > div {
+  display: block;
+  float: left;
+  overflow: hidden;
+  transition: width 0.8s;
+}
+.listTableBox .listTableCenter ul li > div > div {
+  width: 100%;
+  line-height: 0.28rem;
+  padding-left: 0.2rem;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  padding: 0.06rem 0.2rem;
+  word-break: keep-all;
+  word-wrap: break-word;
+  color: #ffffff;
+}
+.listTableBox .listTableCenter ul li > div span {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  background: #4492f5;
+  border: 0;
+  border-radius: 3px;
+  padding: 0.02rem 0.05rem;
+  height: 0.28rem;
+  line-height: 0.26rem;
+  text-align: left;
+  display: block;
+  float: left;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: keep-all;
+  font-size: 0.18rem;
+}
+.listTableBox .listTableCenter ul li > div span.warning {
+  background: #d33636;
+}
+.listTableBox .listTableCenter ul li > div span.done {
+  background: #02b779;
+}
+
+.devInfo {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 0.2rem 0.2rem 0.2rem;
+}
+.devInfo .devInfoText {
+  padding: 5px;
+}
+.devInfo .devInfoText span {
+  display: block;
+  width: 50%;
+  text-align: left;
+  height: 30px;
+  line-height: 30px;
+}
+.devInfo .devImage {
+  width: 100%;
+  height: calc(225/440*100% - 40px);
+  position: relative;
+}
+.devInfo .devImage img {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.devInfo .listText {
+  display: block;
+  height: calc(215/440*100% - 40px);
+  width: 100%;
+  overflow: hidden;
+  background-color: #0d6b87;
+}
+.devInfo .listText > ul {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.devInfo .listText > ul > li {
+  display: block;
+  height: 100%;
+  float: left;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 0.05rem;
+}
+.devInfo .listText .devText {
+  display: block;
+  height: 100%;
+}
+.devInfo .listText .devText .name {
+  font-size: 18px;
+  height: 56px;
+  line-height: 56px;
+  color: #fff;
+  display: block;
+}
+.devInfo .listText .devText .stateBox {
+  display: block;
+}
+.devInfo .listText .devText .stateBox span {
+  display: block;
+  font-size: 13px;
+  color: #fff;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 0.04rem;
+  width: calc(100% - 0.1rem);
+  background-color: #0ab37a;
+  border-radius: 2px;
+}
+.devInfo .listText .devText .stateBox span.warning {
+  background: #d33636;
+}
+.devInfo .listText .devText .devListText {
+  display: block;
+  height: calc(100% - 84px - 0.1rem);
+  padding-top: 0.1rem;
+  overflow: auto;
+}
+.devInfo .listText .devText .devListText ul {
+  display: block;
+  height: 100%;
+}
+.devInfo .listText .devText .devListText ul li {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: 5px 0;
+  line-height: 15px;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  font-size: 12px;
+  padding-left: 0.14rem;
+}
+.devInfo .listText .devText .devListText ul li:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-left-color: #fff;
+  position: absolute;
+  top: 7px;
+  left: 0;
+}
+
+.vitalDevInfo {
+  height: 100%;
+  width: 100%;
+  padding: 0 0.15rem 0.1rem 0.15rem;
+}
+.vitalDevInfo > div {
+  height: 100%;
+  width: 100%;
+}
+
+.devInfo2 {
+  height: calc(100% - 0.2rem);
+  width: calc(100% - 0.1rem);
+  margin-left: 0.05rem;
+  margin-top: 0.1rem;
+  border: 1px solid #00e8ff;
+  overflow: hidden;
+}
+.devInfo2 .top {
+  display: flex;
+  width: 100%;
+  height: 32px;
+  background-color: #0c3447;
+  line-height: 32px;
+  padding: 0 0.1rem;
+}
+.devInfo2 .top > p {
+  display: block;
+  height: 100%;
+  width: 50%;
+  color: #dfe4e6;
+  font-weight: bold;
+  line-height: 32px;
+}
+.devInfo2 .top > div {
+  display: block;
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+}
+.devInfo2 .top > div .circle-icon {
+  display: block;
+  border-radius: 50%;
+  color: #0bb279;
+  background-color: #0bb279;
+  width: 14px;
+  height: 14px;
+  margin: 9px 5px;
+  float: right;
+}
+.devInfo2 .top > div .circle-icon.warning {
+  background-color: #d33636;
+}
+.devInfo2 .top > div .text {
+  display: inline-block;
+  float: right;
+  max-width: calc(100% - 24px);
+  color: #0bb279;
+}
+.devInfo2 .top > div .text.warning {
+  color: #d33636;
+}
+.devInfo2 .content {
+  height: calc(100% - 32px);
+  width: 100%;
+  overflow: hidden;
+}
+.devInfo2 .content .hint {
+  width: 100%;
+  height: 28px;
+  background-color: #0ab37a;
+  color: #def5ed;
+  text-align: center;
+  line-height: 28px;
+  font-size: 15px;
+}
+.devInfo2 .content .devCenter {
+  height: calc(100% - 28px);
+  width: 100%;
+  overflow: hidden;
+  padding: 0.05rem;
+}
+.devInfo2 .content .devCenter .devCenterText {
+  display: block;
+  width: 100%;
+  height: 55%;
+  overflow: hidden;
+  padding-bottom: 0.02rem;
+}
+.devInfo2 .content .devCenter .devCenterText > img {
+  display: block;
+  height: 100%;
+  width: 50%;
+  float: left;
+}
+.devInfo2 .content .devCenter .devCenterText .devTextBox {
+  display: block;
+  float: left;
+  height: 100%;
+  width: 50%;
+  padding-left: 0.04rem;
+  overflow: hidden;
+}
+.devInfo2 .content .devCenter .devCenterText .devTextBox .listBox {
+  height: calc(50% - 0.02rem);
+  width: 100%;
+  background-color: #0d6a85;
+  margin-bottom: 0.04rem;
+  overflow: hidden;
+  position: relative;
+}
+.devInfo2 .content .devCenter .devCenterText .devTextBox .listBox .name {
+  height: 20px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #00e8ff;
+  padding-left: 0.04rem;
+}
+.devInfo2 .content .devCenter .devCenterText .devTextBox .listBox .textBox {
+  display: block;
+  height: calc(100% - 20px);
+  width: 100%;
+  position: relative;
+}
+.devInfo2 .content .devCenter .devCenterText .devTextBox .listBox .text {
+  text-align: center;
+  color: #fff;
+  font-size: 22px;
+  height: 52px;
+  line-height: 52px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.devInfo2 .content .devCenter .rotateProBox {
+  display: block;
+  width: 100%;
+  height: 45%;
+  padding-top: 0.05rem;
+  padding-bottom: 0.02rem;
+}
+.devInfo2 .content .devCenter .rotateProBox .rotatePro {
+  height: 100%;
+  float: left;
+  background-color: #0d6a85;
+  overflow: hidden;
+}
+.devInfo2 .content .devCenter .rotateProBox .rotatePro > p {
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: #50d8ff;
+}
+.devInfo2 .content .devCenter .rotateProBox .rotatePro > div {
+  height: calc(100% - 24px);
+  width: 100%;
+}
+
+.humiture {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.humiture .linetext {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.humiture .linetext p {
+  color: #fff;
+  font-size: 18px;
+}
+.humiture .linetext .blue-line {
+  background-color: #00daf0;
+  width: 32px;
+  height: 2px;
+}
+.humiture .content {
+  width: 100%;
+  height: calc(100% - 46px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.humiture .content > div {
+  width: 45%;
+  height: 120px;
+  margin-right: 8px;
+  border: 1px solid #00e8ff;
+  border-radius: 6px;
+  background-color: rgba(30, 104, 126, 0.4);
+  box-shadow: 0 0 5px 5px rgba(0, 218, 240, 0.2) inset;
+  display: flex;
+}
+.humiture .content > div.warning {
+  border: 1px solid #ff3300;
+  border-radius: 6px;
+  background-color: rgba(102, 20, 0, 0.4);
+  box-shadow: 0 0 5px 5px rgba(255, 51, 0, 0.2) inset;
+}
+.humiture .content > div.warning .align-play span {
+  color: #ff3300;
+}
+.humiture .content > div img {
+  padding-left: 6px;
+  padding-top: 30px;
+  width: 66px;
+  height: 90px;
+}
+.humiture .content > div .align-play {
+  height: 100%;
+  width: calc(100% - 68px);
+  padding-left: 0.14rem;
+}
+.humiture .content > div .align-play span {
+  color: #02b779;
+}
+.humiture .content > div .align-play > div:first-child {
+  padding-top: 20px;
+  padding-left: 2px;
+  font-size: 20px;
+  color: #fff;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+}
+.humiture .content > div .align-play > div:last-child {
+  padding-left: 2px;
+  padding-top: 5px;
+  font-size: 20px;
+  color: #fff;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+.attendance {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.attendance .linetext {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.attendance .linetext p {
+  color: #fff;
+  font-size: 18px;
+}
+.attendance .linetext .blue-line {
+  background-color: #00daf0;
+  width: 32px;
+  height: 2px;
+}
+.attendance .content {
+  width: 100%;
+  height: calc(100% - 46px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.attendance .content > div {
+  width: 30%;
+  height: 120px;
+  margin-right: 8px;
+  border: 1px solid #00e8ff;
+  border-radius: 6px;
+  background-color: rgba(30, 104, 126, 0.4);
+  box-shadow: 0 0 5px 5px rgba(0, 218, 240, 0.2) inset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.attendance .content > div > .con-font {
+  color: #00e8ff;
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.upBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  height: 100%;
+  padding: 0;
+  z-index: 100;
+}
+.upBox > .lightPanel {
+  display: block;
+  width: 90%;
+  height: 78%;
+  background-color: #dedede;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.upBox > .lightPanel > .closeBtn {
+  display: block;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  border-color: #f1f1f1;
+  color: #0e75d8;
+  border: 1px solid #135f91;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 1000;
+  cursor: pointer;
+}
+.upBox > .lightPanel > .closeBtn:before {
+  content: "";
+  height: 16px;
+  width: 2px;
+  background-color: #0e75d8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  -moz-transform: translate(-50%, -50%) rotate(45deg);
+  -ms-transform: translate(-50%, -50%) rotate(45deg);
+  -o-transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.upBox > .lightPanel > .closeBtn:after {
+  content: "";
+  height: 16px;
+  width: 2px;
+  background-color: #0e75d8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+  -moz-transform: translate(-50%, -50%) rotate(-45deg);
+  -ms-transform: translate(-50%, -50%) rotate(-45deg);
+  -o-transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.upBox > .lightPanel > .closeBtn:active {
+  background-color: #c1c1c1;
+  border-color: #c1c1c1;
+}
+.upBox > .lightPanel > .ifromBox {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.upBox > .lightPanel > .ifromBox > .title {
+  display: block;
+  width: 100%;
+  height: 42px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 42px;
+  border-bottom: 1px solid #adadad;
+}
+.upBox > .lightPanel > .ifromBox > .contontBox {
+  height: calc(100% - 42px);
+  width: 100%;
+}
+.upBox > .lightPanel .titleLightPanel {
+  background-image: none;
+  color: #2e3454;
+  height: 0.48rem;
+  line-height: 0.48rem;
+  font-size: 0.2rem;
+  width: 3.5rem;
+  font-weight: bold;
+  background: -moz-linear-gradient(left, rgba(41, 188, 255, 0) 0%, #29bcff 50%, rgba(41, 188, 255, 0) 100%);
+  background: -webkit-linear-gradient(left, rgba(41, 188, 255, 0) 0%, #29bcff 50%, rgba(41, 188, 255, 0) 100%);
+  background: -o-linear-gradient(left, rgba(41, 188, 255, 0) 0%, #29bcff 50%, rgba(41, 188, 255, 0) 100%);
+  background: -ms-linear-gradient(left, rgba(41, 188, 255, 0) 0%, #29bcff 50%, rgba(41, 188, 255, 0) 100%);
+  background: linear-gradient(to right, rgba(41, 188, 255, 0) 0%, #29bcff 50%, rgba(41, 188, 255, 0) 100%);
+  background-size: 100% 0.02rem;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+.upBox > .lightPanel .ifromBox {
+  position: relative;
+  padding-top: 0;
+}
+.upBox > .lightPanel .ifromBox .title {
+  display: block;
+  width: 100%;
+  height: 32px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 32px;
+  color: #ffffff;
+}
+.upBox > .lightPanel .ifromBox > .title {
+  display: block;
+  width: 100%;
+  height: 42px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 42px;
+  border-bottom: 1px solid #adadad;
+}
+.upBox > .lightPanel .ifromBox .listContenBox {
+  background-color: rgba(2, 20, 33, 0.85);
+  padding: 10px;
+  position: absolute;
+}
+.upBox > .lightPanel .ifromBox .listContenBox > ul {
+  display: block;
+}
+.upBox > .lightPanel .ifromBox .listContenBox > ul > li {
+  display: block;
+  width: 240px;
+  height: 38px;
+  line-height: 38px;
+  font-size: 16px;
+  overflow: hidden;
+}
+.upBox > .lightPanel .ifromBox .listContenBox > ul > li .title {
+  width: 90px;
+  text-align: right;
+  padding-right: 5px;
+  line-height: 38px;
+  font-size: 14px;
+  float: left;
+  color: #ffffff;
+}
+.upBox > .lightPanel .ifromBox .listContenBox > ul > li .text {
+  width: calc(100% - 90px);
+  text-align: left;
+  padding-right: 5px;
+  line-height: 38px;
+  font-size: 14px;
+  float: left;
+  padding-left: 10px;
+  color: #81effd;
+}
+.upBox > .lightPanel .ifromBox .listRightBox {
+  position: absolute;
+  width: 340px;
+  top: 58px;
+  right: 15px;
+  bottom: 10px;
+  overflow: hidden;
+}
+.upBox > .lightPanel .ifromBox .listRightBox > div {
+  width: 100%;
+  height: calc(50% - 20px);
+  background-color: rgba(2, 20, 33, 0.85);
+  margin-top: 20px;
+}
+.upBox > .lightPanel .ifromBox .listRightBox > div.title {
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+}
+.upBox > .lightPanel .ifromBox .listRightBox > div > div {
+  width: 100%;
+  height: calc(100% - 46px);
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+  /*padding: 10px 10px 30px 10px;*/
+}
+.upBox > .lightPanel .ifromBox .listRightBox > div:first-child {
+  margin-top: 0;
+}
+
+.upArroeBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  height: 100%;
+  padding: 0;
+  z-index: 100;
+}
+.upArroeBox > .lightPanel {
+  display: block;
+  width: 90%;
+  height: 78%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.upArroeBox > .lightPanel:before {
+  display: block;
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-clip: padding-box;
+  border-width: 80px 120px 80px 164px !important;
+  border-image-source: url(../images/bg.png);
+  border-image-slice: 80 120 80 164;
+  background-image: url(../images/bg-slice.png);
+  opacity: 0.95;
+  z-index: -1;
+}
+.upArroeBox > .lightPanel > .closeBtn {
+  display: block;
+  height: 42px;
+  width: 42px;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1000;
+  cursor: pointer;
+}
+.upArroeBox > .lightPanel > .closeBtn:before {
+  content: "";
+  height: 16px;
+  width: 2px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  -moz-transform: translate(-50%, -50%) rotate(45deg);
+  -ms-transform: translate(-50%, -50%) rotate(45deg);
+  -o-transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.upArroeBox > .lightPanel > .closeBtn:after {
+  content: "";
+  height: 16px;
+  width: 2px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+  -moz-transform: translate(-50%, -50%) rotate(-45deg);
+  -ms-transform: translate(-50%, -50%) rotate(-45deg);
+  -o-transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.upArroeBox > .lightPanel > .closeBtn:active:before, .upArroeBox > .lightPanel > .closeBtn:active:after {
+  opacity: 0.5;
+}
+.upArroeBox > .lightPanel > .title {
+  display: inline-block;
+  height: 72px;
+  max-width: calc(100% - 280px);
+  min-width: 320px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  margin: 0 auto;
+  margin-top: 12px;
+  font-size: 0.28rem;
+  z-index: 100;
+  padding: 0 70px;
+  color: #2db4c0;
+  line-height: 60px;
+  text-align: center;
+}
+.upArroeBox > .lightPanel > .title:before {
+  display: block;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-clip: padding-box;
+  border-width: 0px 80px 72px 80px !important;
+  border-image-source: url(../images/title.png);
+  border-image-slice: 0 80 72 89;
+  background-image: url(../images/title-slice.jpg);
+  opacity: 0.95;
+}
+.upArroeBox > .lightPanel > .contontBox {
+  display: block;
+  width: calc(100% - 34px);
+  height: calc(100% - 144px);
+  margin: 0 auto;
+  margin-top: 80px;
+}
+
+.proListTable {
+  display: block;
+  height: calc(100% - 10px);
+  width: 100%;
+  font-size: 0.2rem;
+}
+.proListTable > div {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+.proListTable .proListTables {
+  display: block;
+  overflow: hidden;
+}
+.proListTable .proListTables > li {
+  display: block;
+  padding: 0 0.2rem;
+  overflow: hidden;
+  margin-bottom: 0.1rem;
+}
+.proListTable .proListTables > li > p {
+  width: calc(20% - 0.02rem);
+  float: left;
+  height: 42px;
+  line-height: 42px;
+  background-color: #f1f1f1;
+  color: #000000;
+  text-align: center;
+  margin-right: 0.02rem;
+}
+.proListTable .proListTables > li .state {
+  display: block;
+  width: calc(20% - 0.04rem);
+  height: 42px;
+  line-height: 42px;
+  float: left;
+  line-height: 42px;
+  text-align: center;
+  background-color: #4ccc77;
+  margin-right: 0.04rem;
+}
+.proListTable .proListTables > li .state.warning {
+  background-color: #da8531;
+}
+.proListTable .proListTables > li .state.error {
+  background-color: #d33636;
+}
+.proListTable .proListTables > li .proBox {
+  display: block;
+  width: 60%;
+  background-color: rgba(34, 89, 163, 0.4);
+  float: left;
+  height: 42px;
+  line-height: 42px;
+}
+.proListTable .proListTables > li .proBox .pro {
+  display: block;
+  background-color: #4492f5;
+  text-align: right;
+  box-sizing: border-box;
+}
+.proListTable .proListTables > li .proBox .pro > span {
+  padding: 0 0.04rem;
+}
+
+.lisLink {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.lisLink > div {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+.lisLink .lisLinkBox {
+  display: block;
+  height: 100%;
+  padding: 0.02rem 0;
+}
+.lisLink .lisLinkBox > li {
+  display: block;
+  width: 33.33%;
+  height: 100%;
+  float: left;
+  overflow: heidden;
+  border-right: 1px solid #16b7c5;
+}
+.lisLink .lisLinkBox > li:hover > a {
+  opacity: 0.7;
+}
+.lisLink .lisLinkBox > li > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+}
+.lisLink .lisLinkBox > li > a > img {
+  display: block;
+  height: calc(100% - 0.38rem);
+  width: auto;
+  margin: 0 auto;
+  margin-top: 0.1rem;
+}
+.lisLink .lisLinkBox > li > a > p {
+  display: block;
+  width: 100%;
+  text-align: center;
+  height: 0.28rem;
+  line-height: 0.28rem;
+  font-size: 0.16rem;
+}
+.lisLink .lisLinkBox > li:last-child {
+  border: none;
+}
+
+.pieCheartStat {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.pieCheartStat .title {
+  height: 0.48rem;
+  line-height: 0.48rem;
+  text-align: center;
+  font-size: 0.2rem;
+}
+.pieCheartStat .pieBox {
+  display: block;
+  height: calc(100% - 2rem);
+  width: 100%;
+}
+.pieCheartStat .statTable {
+  display: block;
+  width: calc(100% - 0.1rem);
+  height: 1.38rem;
+  margin-left: 0.05rem;
+  overflow: hidden;
+  border-top: 1px solid #32bfff;
+  border-left: 1px solid #32bfff;
+  border-bottom: 1px solid #32bfff;
+}
+.pieCheartStat .statTable .statTableListBox {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+.pieCheartStat .statTable .statTableListBox ul {
+  display: block;
+  overflow: hidden;
+}
+.pieCheartStat .statTable .statTableListBox ul > li {
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid #32bfff;
+}
+.pieCheartStat .statTable .statTableListBox ul > li:first-child {
+  border-top: none;
+}
+.pieCheartStat .statTable .statTableListBox ul > li > span {
+  display: block;
+  height: 0.44rem;
+  width: 50%;
+  float: left;
+  line-height: 0.44rem;
+  text-align: center;
+  border-right: 1px solid #32bfff;
+  font-size: 0.16rem;
+}
+.pieCheartStat .statTable .statTableListBox ul > li:nth-child(2n+1) {
+  background-color: rgba(37, 94, 169, 0.7);
+}
+
+.listTab {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.listTab > .listTabBox {
+  width: 100%;
+  height: 44px;
+  font-size: 0.18rem;
+  position: relative;
+}
+.listTab > .listTabBox:before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #6497eb;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.listTab > .listTabBox .listTabUl {
+  width: 100%;
+  white-space: nowrap;
+  padding: 0 0.28rem;
+}
+.listTab > .listTabBox .listTabUl > li {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.5);
+  height: 43px;
+  line-height: 44px;
+  padding: 0 0.2rem;
+  text-align: center;
+  border: 1px solid #6497eb;
+  border-right: none;
+  cursor: pointer;
+  position: relative;
+  background-color: #171e41;
+}
+.listTab > .listTabBox .listTabUl > li.active {
+  border-top: 1px solid #7aadff !important;
+  border-left: 1px solid #7aadff !important;
+  border-right: 1px solid #7aadff !important;
+  border-bottom: 1px solid #171e41 !important;
+  margin-top: 1px;
+  color: white;
+}
+.listTab > .listTabBox .listTabUl > li.active + li {
+  border-left: none;
+}
+.listTab > .listTabBox .listTabUl > li:last-child {
+  border-right: 1px solid #6497eb;
+}
+
+.binaryBox {
+  display: block;
+  height: 100%;
+  width: 100%;
+  font-size: 0.2rem;
+}
+.binaryBox > div {
+  display: block;
+  height: 100%;
+  width: 50%;
+  float: left;
+}
+.binaryBox > div .lableBox {
+  height: 46px;
+  width: 100%;
+  text-align: center;
+}
+.binaryBox > div .lableBox .lable {
+  display: inline-block;
+  height: 46px;
+  width: 120px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #2365d2;
+  line-height: 46px;
+  box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.3) inset;
+}
+.binaryBox > div .content {
+  height: calc(100% - 46px);
+  width: 100%;
+}
+
+.stateSign {
+  display: inline-block;
+  overflow: hidden;
+  font-size: 0.32rem;
+}
+.stateSign.icon {
+  padding-left: 0.34rem;
+  background-size: 0.24rem 0.24rem;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 0.06rem;
+}
+.stateSign.fixing {
+  color: #4492f5;
+}
+.stateSign.normal {
+  color: #4ccc77;
+}
+.stateSign.normal.icon {
+  background-image: url(../images/safe_icon.png);
+}
+.stateSign.warning {
+  color: #db8546;
+}
+.stateSign.warning.icon {
+  background-image: url(../images/Tips_icon.png);
+}
+.stateSign.error {
+  color: #ff4441;
+}
+.stateSign.error.icon {
+  background-image: url(../images/warning_icon.png);
+}
+
+.EAMExBox {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.EAMExBox .tipTopLable {
+  overflow: hidden;
+  position: absolute;
+  top: -0.45rem;
+  left: 0.5rem;
+  height: 0.45rem;
+  font-size: 0;
+}
+.EAMExBox .tipTopLable > span {
+  margin-right: 0.36rem;
+}
+.EAMExBox .centerBox {
+  height: 100%;
+  width: 100%;
+}
+.EAMExBox .centerBox .EAMExListBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  min-width: 100%;
+  text-align: center;
+}
+.EAMExBox .centerBox .EAMExListBox > div {
+  display: inline-block;
+  height: 100%;
+  width: 280px;
+  margin-left: 20px;
+  text-align: left;
+}
+.EAMExBox .centerBox .EAMExListBox > div > div:first-child {
+  height: 50%;
+}
+.EAMExBox .centerBox .EAMExListBox > div > div:nth-child(2) {
+  height: 25%;
+}
+.EAMExBox .centerBox .EAMExListBox > div > div:nth-child(3) {
+  height: 25%;
+  text-align: center;
+}
+.EAMExBox .centerBox .EAMExListBox > div > div:nth-child(3) img {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+
+.textLableBox {
+  height: 100%;
+  width: 100%;
+  font-size: 0.2rem;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.textLableBox.error {
+  background-color: rgba(255, 58, 65, 0.25);
+  background-image: url(../images/warning_icon.png);
+  background-size: 180px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.textLableBox .title {
+  height: 0.82rem;
+  line-height: 0.82rem;
+  text-align: center;
+  font-size: 0.28rem;
+}
+.textLableBox .textListBox {
+  padding: 0 0.2rem;
+  height: calc(100% - 0.84rem);
+  overflow: auto;
+}
+.textLableBox .textListBox .listText {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 0.1rem;
+}
+.textLableBox .textListBox .listText .lable {
+  line-height: 0.34rem;
+  color: #adadad;
+  font-size: 0.2rem;
+}
+.textLableBox .textListBox .listText .text {
+  line-height: 0.34rem;
+  color: #ffffff;
+}
+.textLableBox .textListBox .listText.state .lable {
+  line-height: 0.52rem;
+  color: #ffffff;
+}
+
+.switchBox {
+  display: inline-block;
+  overflow: hidden;
+  height: 0.36rem;
+  padding: 0.02rem;
+  border: 1px solid #2259a3;
+}
+.switchBox > span {
+  display: block;
+  height: 100%;
+  padding: 0 0.1rem;
+  line-height: 0.32rem;
+  float: left;
+  font-size: 0.18rem;
+  cursor: pointer;
+}
+.switchBox > span.active, .switchBox > span:active {
+  background-color: #4492f5;
+}
+
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.list-complete-move {
+  transition: transform 1s;
+}
+
+#app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+}
+
+.hidden3d {
+  visibility: hidden;
+  top: -100%;
+}
+
+.visible3d {
+  visibility: visible;
+  top: 0;
+}

@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMT</title>
+    <link rel="stylesheet" href="../../css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../../fonts/iconfont.css">
+    <link rel="stylesheet" href="../common/css/panel3.css">
+    <link rel="stylesheet" type="text/css" href="../common/css/components.css" />
+    <link rel="stylesheet" href="../common/css/style.css">
+    <script>
+        /**设置rem
+         * 需要放在样式修改之前，css文件前
+         */
+        (function () {
+            var _self = this;
+            _self.width = 1920;      //设置默认最大宽度
+            _self.fontSize = 100;   //默认字体大小
+            _self.widthProportion = function () {
+                var p = (document.body && document.body.clientWidth || document.getElementsByTagName("html")[0].offsetWidth) / _self.width;
+                return p > 1 ? 1 : p < 0.2 ? 0.2 : p;
+            };
+            _self.changePage = function () {
+                var a = _self.widthProportion() * _self.fontSize;
+                document.getElementsByTagName("html")[0].setAttribute("style", "font-size:" + a + "px !important");
+                if (a != parseFloat(window.getComputedStyle(document.documentElement)["fontSize"])) {
+                    document.getElementsByTagName("html")[0].setAttribute("style", "font-size:" + a / (parseFloat
+                        (window.getComputedStyle(document.documentElement)["fontSize"]) / a) + "px !important");
+                }
+            }
+            _self.changePage();
+            window.addEventListener('resize', function () {
+                _self.changePage();
+            }, false);
+        })();
+    </script>
+
+    <script src="../../webGL/js/three.js"></script>
+    <script src="../../webGL/js/libs/tween.min.js"></script>
+    <!--摄像机-->
+    <script src="../../webGL/js/controls/OrbitControls.js"></script>
+    <!--检测支持_this文件-->
+    <script src="../../webGL/js/Detector.js"></script>
+    <script src="../../js/jquery-1.10.2.min.js"></script>
+    <!--滚动条-->
+    <script src="../../js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="../../js/jquery.mousewheel.min.js"></script>
+    <script src="../../js/jquery.transit.js"></script>
+    <script src="../../js/layer/layer.js"></script>
+    <script src="../../js/echarts.min.js"></script>
+    <script src="../../js/axios.min.js"></script>
+    <script src="../../fonts/iconfont.js"></script>
+
+    <script src="../../js/vue.js"></script>
+    <script src="../common/js/web-3d.js"></script>
+    <script src="../common/js/lodash.js"></script>
+
+    <!-- 组件 -->
+    <script src="../common/components/layout.js"></script>
+    <script src="../common/components/conterLayout.js"></script>
+    <!-- <script src="components/3dview.js"></script> -->
+    <script src="../common/components/head.js"></script>
+    <script src="../common/components/cardType1.js"></script>
+    <script src="../common/components/cardType2.js"></script>
+    <!-- 2021.4.7 加入图标列表JS -->
+    <script src="../common/components/iconList.js"></script>
+    <script src="../common/components/labelChart1.js"></script>
+    <script src="../common/components/labelChart2.js"></script>
+    <script src="../common/components/labelChart3.js"></script>
+    <script src="../common/components/qualityStat.js"></script>
+    <script src="../common/components/listTable.js"></script>
+    <script src="../common/components/echartLoop.js"></script>
+    <script src="../common/components/devInfo.js"></script>
+    <script src="../common/components/devInfo2.js"></script>
+    <script src="../common/components/vitalDevInfo.js"></script>
+    <script src="../common/components/humiture.js"></script>
+    <script src="../common/components/attendance.js"></script>
+    <script src="../common/components/yearChart.js"></script>
+    <script src="../common/components/weekChart.js"></script>
+    <script src="../common/components/flawChart.js"></script>
+    <script src="../common/components/bigMap.js"></script>
+    <script src="../common/components/upBox.js"></script>
+    <script src="../common/components/tableDialog.js"></script>
+    <script src="../common/components/model3d.js"></script>
+
+    <!-- 3D模块初始化 -->
+    <script src="js/public.js"></script>
+</head>
+
+<body>
+    <div id="app" style="height: 100%;width: 100%;">
+        <layout>
+            <template slot="head">
+                <head-top :headr="headr" @onchangepage="changePage"></head-top>
+            </template>
+            <template slot="webGl">
+                <div style="height: 100%;width: 100%;" v-show="indexPage==1">
+                    <transition name="fade">
+                        <big-map v-show="indexPage==1" :propdata="A06"></big-map>
+                    </transition>
+                </div>
+                <div style="height: 100%;width: 100%;" v-bind:class="indexPage==3 ? 'visible3d' : 'hidden3d'">
+                    <transition name="fade">
+                        <!-- <web3d v-show="indexPage==3" v-on:clickmodel="click3dModel" :propdata="D3"></web3d> -->
+                        <div ref="webGl3d" id="contontBoxMain" style="height:100%;width:100%"></div>
+                    </transition>
+                </div>
+            </template>
+            <template slot="conter">
+                <conter-layout :layout="layoutBoard" v-show="indexPage==4">
+                    <template slot="iconList">
+                        <transition name="shiftLeft">
+                            <icon-list @dialogonopen="openDialog" v-show="indexPage==4" :propdata="iconData"></icon-list>
+                        </transition>
+                    </template>
+                </conter-layout>
+                <conter-layout :layout="layoutMap" v-show="indexPage==1">
+                    <template slot="block1">
+                        <transition name="shiftLeft">
+                            <card-type1 v-show="indexPage==1" title="年度生产计划达成情况">
+                                <label-chart1 :propdata="A01"></label-chart1>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block2">
+                        <transition name="shiftLeft2">
+                            <card-type1 v-show="indexPage==1" title="进厂质量校验">
+                                <quality-stat :change-init="indexPage==1" :propdata="A02"></quality-stat>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block3">
+                        <transition name="shiftRight">
+                            <card-type1 v-show="indexPage==1" title="物料到货情况">
+                                <list-table :propdata="A04"></list-table>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block4">
+                        <transition name="shiftRight2">
+                            <card-type1 v-show="indexPage==1" title="成品交付信息预览">
+                                <label-chart3 :propdata="A08"></label-chart3>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block5">
+                        <transition name="shiftBottom">
+                            <card-type1 :long=true v-show="indexPage==1" title="本月重点项目展示">
+                                <list-table :propdata="A03"></list-table>
+                            </card-type1>
+                        </transition>
+                    </template>
+                </conter-layout>
+
+                <conter-layout :layout="layoutSyn" v-show="indexPage==2"
+                    style="margin-top:20px;height:calc(100% - 20px)">
+                    <template slot="block1">
+                        <transition name="shiftLeft">
+                            <card-type1 v-show="indexPage==2" title="1线设备信息">
+                                <dev-info :propdata="A12"></dev-info>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block2">
+                        <transition name="shiftLeft2">
+                            <card-type1 v-show="indexPage==2" title="2线设备信息">
+                                <dev-info :propdata="A13"></dev-info>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block3">
+                        <transition name="fade">
+                            <card-type1 v-show="indexPage==2" title="关键设备信息预览">
+                                <vital-dev-info :propdata="A14" :change-init="indexPage==2"></vital-dev-info>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block4">
+                        <transition name="shiftBottom">
+                            <card-type1 v-show="indexPage==2" title="环境温湿度">
+                                <div style="height:100%;width: 100%;">
+                                    <div style="height:50%;width: 100%;">
+                                        <humiture :propdata="A18"></humiture>
+                                    </div>
+                                    <div style="height:50%;width: 100%;">
+                                        <attendance :propdata="A19"></attendance>
+                                    </div>
+                                </div>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block5">
+                        <transition name="shiftRight">
+                            <card-type1 v-show="indexPage==2" title="年度产能趋势">
+                                <year-chart :change-init="indexPage==2" :propdata="A20"></year-chart>
+                            </card-type1>
+                        </transition>
+                    </template>
+                    <template slot="block6">
+                        <transition name="shiftRight2">
+                            <card-type1 v-show="indexPage==2" title="质量信息">
+                                <div style="padding: 0 0.2rem 0.2rem 0.2rem;height: 100%">
+                                    <div style="height: 50%;border-bottom: 1px solid #206c51;">
+                                        <week-chart :change-init="indexPage==2" :propdata="A21"></week-chart>
+                                    </div>
+                                    <div style="height: 50%;">
+                                        <flaw-chart :change-init="indexPage==2" :propdata="A22"></flaw-chart>
+                                    </div>
+                                </div>
+                            </card-type1>
+                        </transition>
+                    </template>
+                </conter-layout>
+
+                <conter-layout :layout="layout3D" v-show="indexPage==3">
+                    <div class="centerBox" style="position: relative">
+                        <div class="webGLBox_main" id="contontBox" style="height: 100%;width: 100%;position: relative;padding: 0;"></div>
+                    </div>
+                    <template slot="block1">
+                        <transition name="shiftLeft">
+                            <card-type2 v-show="indexPage==3" title="在产工单信息预览">
+                                <label-chart2 :propdata="A07"></label-chart2>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block2">
+                        <transition name="shiftLeft2">
+                            <card-type2 v-show="indexPage==3" title="安灯超期处理信息">
+                                <list-table :propdata="A05"></list-table>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block3">
+                        <transition name="shiftRight">
+                            <card-type2 v-show="indexPage==3" title="工单产前准备情况预览">
+                                <list-table :propdata="A10"></list-table>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block4">
+                        <transition name="shiftRight2">
+                            <card-type2 v-show="indexPage==3" title="关键工序直通率">
+                                <label-chart2 :propdata="A11" :isloop="true" :change-init="indexPage==3"></label-chart2>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block5">
+                        <transition name="shiftBottom">
+                            <card-type2 :long=true v-show="indexPage==3" title="生产过程中不良展示>>" v-on:unfold="cardunfold">
+                                <list-table :propdata="A09" :flex="layout3D[4].col == 6"></list-table>
+                            </card-type2>
+                        </transition>
+                    </template>
+                </conter-layout>
+            </template>
+        </layout>
+
+        <transition name="fade">
+            <up-box v-show="upBox" v-on:close="upBoxClose" title="">
+                <model3d v-if="upBox" :propsdata="upBoxModelData"></model3d>
+            </up-box>
+        </transition>
+        <!-- 加入弹框代码 -->
+        <transition name="fade">
+            <table-dialog v-show="dialogShow" @dialogonclose="closeDialog" :propsdata="dialogdata"></table-dialog>
+        </transition>
+    </div>
+    <div class="upIfromBox" style="top: -50000px;">
+        <div class="lightPanel">
+            <span class="closeBtn"></span>
+            <div class="ifromBox">
+                <div class="title"></div>
+                <div id="contontBox2" style="height: calc(100% - 42px);width: 100%;"></div>
+                <div class="listContenBox" style="display: none;">
+                    <ul>
+                        <!-- <li>
+                            <p class="title">测试时间:</p>
+                            <p class="text">2019-08-30</p>
+                        </li>
+                        <li>
+                            <p class="title">测试人员:</p>
+                            <p class="text">2019-08-30</p>
+                        </li>
+                        <li>
+                            <p class="title">是否合格:</p>
+                            <p class="text">是</p>
+                        </li>
+                        <li>
+                            <p class="title">不良现象:</p>
+                            <p class="text">空</p>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="listContenBox list-box" >
+                    <div class="item agv-info">
+                        <h1>设备状态</h1>
+                        <div class="agv-status clearfix">
+                            <span class="now-status">在线</span>
+                            <div class="power-status clearfix">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-011dianliang"></use>
+                                </svg>
+                                <p>
+                                    <span class="info">80%</span>
+                                    <span class="name">设备电量</span>
+                                </p>
+                            </div>
+                            <div class="cargo-status clearfix">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-02huojia"></use>
+                                </svg>
+                                <p>
+                                    <span class="info">186</span>
+                                    <span class="name">搬运货架</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="agv-btn-group">
+                            <button><i class="iconfont icon-03juqi"></i>举起</button>
+                            <button><i class="iconfont icon-04fangxia"></i>放下</button>
+                            <button><i class="iconfont icon-05zanting"></i>暂停</button>
+                            <button><i class="iconfont icon-06jixu"></i>继续</button>
+                            <button><i class="iconfont icon-07chongdian"></i>充电</button>
+                            <button><i class="iconfont icon-08paichu"></i>排除</button>
+                            <button><i class="iconfont icon-09quxiao"></i>取消</button>
+                            <button><i class="iconfont icon-10weixiu"></i>维修</button>
+                        </div>
+                    </div>
+                    <div class="item person-info">
+                        <h1>人员信息</h1>
+                        <div class="info-wrap clearfix">
+                            <div class="person-head"><img src="images/header-img.png" alt=""></div>
+                            <div class="info-text">
+                                <p class="name">张力</p>
+                                <p class="position">产线技术人员</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item parameter">
+                        <h1>设备侧信息</h1>
+                        <ul></ul>
+                    </div>
+                </div>
+                <div class="listRightBox list-box">
+                    <div class="topBox">
+                        <p class="title">产线效率</p>
+                        <div class="center">
+                            <div id="graphOne" style="height: 100%;width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="contenBox">
+                        <p class="title">运行效率</p>
+                        <div class="center">
+                            <div id="graphTwo" style="height: 100%;width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="item bad-info">
+                        <h1><span></span><i class="iconfont icon-jinggao"></i></h1>
+                        <ul></ul>
+                    </div>
+                    <!--<div class="bottomBox">-->
+                    <!--<p class="title">故障原因</p>-->
+                    <!--<div class="center">-->
+                    <!--<div id="graphThree" style="height: 100%;width: 100%"></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        let autoTimer = null;
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                //新增定义变量开始
+                dialogShow : false, // 弹框开关
+                autoChange: true,   //自动换页开关
+                dialogdata: {},
+                indexPage: 1,
+                timer: "",
+                //新增定义变量结束
+                headr: {
+                    title: "pangus 数字孪生看板",
+                    logo1Url: "../common/images/Pangus-logo.png",
+                    logo1Ur2: "",
+                    // 修改button
+                    buttonList: ["铁路地图","综合看板","3D看板","数据汇总"],
+                    indexPage: "1",
+                },
+                name: '1',
+                upBox: false,
+                layoutBoard:[
+                    {
+                        name: "iconList",
+                        col: 18,
+                        cor: 7,
+                        top: 7,
+                        left: 12,
+                        transform: "translate(-50% , -50%)" // 新增transorm偏移
+                    }
+                ],
+                layout3D: [
+                    {
+                        name: "block1",
+                        col: 6,
+                        cor: 7,
+                        top: 0,
+                        left: 0
+                    },
+                    {
+                        name: "block2",
+                        col: 6,
+                        cor: 7,
+                        top: 7,
+                        left: 0
+                    },
+                    {
+                        name: "block3",
+                        col: 6,
+                        cor: 14,
+                        top: 0,
+                        left: 18
+                    },
+                    {
+                        name: "block4",
+                        col: 6,
+                        cor: 10,
+                        top: 14,
+                        left: 18
+                    },
+                    {
+                        name: "block5",
+                        col: 18,
+                        cor: 10,
+                        top: 14,
+                        left: 0
+                    },
+                ],
+                layoutMap: [
+                    {
+                        name: "block1",
+                        col: 6,
+                        cor: 7,
+                        top: 0,
+                        left: 0
+                    },
+                    {
+                        name: "block2",
+                        col: 6,
+                        cor: 7,
+                        top: 7,
+                        left: 0
+                    },
+                    {
+                        name: "block3",
+                        col: 6,
+                        cor: 7,
+                        top: 0,
+                        left: 18
+                    },
+                    {
+                        name: "block4",
+                        col: 6,
+                        cor: 7,
+                        top: 7,
+                        left: 18
+                    },
+                    {
+                        name: "block5",
+                        col: 24,
+                        cor: 10,
+                        top: 14,
+                        left: 0
+                    },
+                ],
+                layoutSyn: [
+                    {
+                        name: "block1",
+                        col: 8,
+                        cor: 12,
+                        top: 0,
+                        left: 0
+                    },
+                    {
+                        name: "block2",
+                        col: 8,
+                        cor: 12,
+                        top: 12,
+                        left: 0
+                    },
+                    {
+                        name: "block3",
+                        col: 8,
+                        cor: 12,
+                        top: 0,
+                        left: 8
+                    },
+                    {
+                        name: "block4",
+                        col: 8,
+                        cor: 12,
+                        top: 12,
+                        left: 8
+                    },
+                    {
+                        name: "block5",
+                        col: 8,
+                        cor: 12,
+                        top: 0,
+                        left: 16
+                    },
+                    {
+                        name: "block6",
+                        col: 8,
+                        cor: 12,
+                        top: 12,
+                        left: 16
+                    },
+                ],
+                upBoxModelData: {
+                    elem: '',
+                    data: {
+                        devText: [
+                            {
+                                name: "设备名称",
+                                value: "xxxxxx"
+                            },
+                            {
+                                name: "设备型号",
+                                value: "YG210"
+                            },
+                            {
+                                name: "操机人员",
+                                value: "PG231255"
+                            },
+                            {
+                                name: "设备程序",
+                                value: "ST350QW-V2.0"
+                            },
+                            {
+                                name: "设备抛料",
+                                value: "0.5%"
+                            },
+                            {
+                                name: "贴装数量",
+                                value: "570PCS"
+                            },
+                        ]
+                    }
+                },
+                //年度计划达成情况
+                D3: [],
+                A01: [
+                    {
+                        name: "年度计划产值",
+                        value: "0(件)"
+
+                    },
+                    {
+                        name: "当前达成产值",
+                        value: "0(件)"
+
+                    },
+                    {
+                        name: "当前未完成产值",
+                        value: "0(件)"
+
+                    }
+                ],
+                A02: {
+                    succeed: 0,
+                    pass: 0,
+                    defeated: 0,
+
+                },
+                A03: {
+                    colName: ["项目类型", "截止时间", "项目描述", "主要负责人", "当前状态"],
+                    colModel: [
+                        {
+                            name: "A03_01",
+                            widthPer: 20,
+                            hide: false,
+                            flexd: true,
+                        },
+                        {
+                            name: "A03_02",
+                            widthPer: 20,
+                            hide: false,
+                        },
+                        {
+                            name: "A03_03",
+                            widthPer: 40,
+                            hide: false,
+                        },
+                        {
+                            name: "A03_04",
+                            widthPer: 20,
+                            hide: false,
+                        },
+                        {
+                            name: "A03_05",
+                            width: 120,
+                            hide: false,
+                            flexd: true,
+                            formatterClass: function (val) {
+                                return val
+                            },
+                            formatterText: function (val) {
+                                if (val == 'warning') {
+                                    return "异常"
+                                } else if (val == 'fixing') {
+                                    return "处理中"
+                                } else if (val == 'done') {
+                                    return "已完成"
+                                }
+                                // return "处理中"
+                            },
+                        }
+
+                    ],
+                    colData: [
+                        {
+                            A03_01: "--",
+                            A03_02: "--",
+                            A03_03: "--",
+                            A03_04: "--",
+                            A03_05: "fixing",
+                        }
+                    ]
+                },
+                A04: {
+                    colName: ["物料编码", "当前库存数", "最晚到货时间"],
+                    colModel: [
+                        {
+                            name: "A04_01",
+                            widthPer: 50,
+                            hide: false,
+                        },
+                        {
+                            name: "A04_02",
+                            widthPer: 40,
+                            hide: false,
+                        },
+                        {
+                            name: "A04_03",
+                            width: 180,
+                            hide: false,
+                        }
+
+                    ],
+                    colData: [
+                        {
+                            A04_01: "--",
+                            A04_02: "--",
+                            A04_03: "--",
+                            A04_04: "--",
+                            A04_05: "--",
+                        }
+                    ]
+                },
+                A05: {
+                    colName: ["异常描述", "异常时间", "当前处理人"],
+                    colModel: [
+                        {
+                            name: "A05_01",
+                            widthPer: 50,
+                            hide: false,
+                        },
+                        {
+                            name: "A05_02",
+                            widthPer: 50,
+                            hide: false,
+                        },
+                        {
+                            name: "A05_03",
+                            width: 120,
+                            hide: false,
+                        }
+
+                    ],
+                    colData: [
+                        {
+                            A05_01: "--",
+                            A05_02: "--",
+                            A05_03: "--",
+                            A05_04: "--",
+                            A05_05: "--",
+                        }
+                    ]
+                },
+                A06: [
+                    { "name": "京津线", "lineName": "jjLine", "pointName": ["华南东莞总部PCB线", "华东昆山PCB线", "华北北京SMT线", "西南重庆SMT线"], "coordinate": [[113.23, 23.16], [120.48, 31.06], [116.20, 39.56], [106.55, 29.57]],"link":["../pcb/","../pcb/","../smt/","../smt/"] }
+                ],
+                A07: [
+                    {
+                        title: "SMT",
+                        value: 0,
+                    },
+                    {
+                        title: "DIP",
+                        value: 0,
+                    },
+                    {
+                        title: "组装",
+                        value: 0,
+                    }
+                ],
+                A08: [
+                    {
+                        text: "周交付台件",
+                        value: 0,
+                    },
+                    {
+                        text: "月交付台件",
+                        value: 0,
+                    }
+                ],
+                A09: {
+                    colName: ["工单号", "成品名称", "不良信息描述", "发生时间", "当前处理人", "状态"],
+                    colModel: [
+                        {
+                            name: "A09_01",
+                            widthPer: 20,
+                            hide: false,
+                            flexd: true,
+                        },
+                        {
+                            name: "A09_02",
+                            widthPer: 15,
+                            hide: false,
+                        },
+                        {
+                            name: "A09_03",
+                            widthPer: 40,
+                            hide: false,
+                        },
+                        {
+                            name: "A09_04",
+                            widthPer: 15,
+                            hide: false,
+                        },
+                        {
+                            name: "A09_05",
+                            widthPer: 10,
+                            hide: false,
+                            flexd: true,
+                        },
+                        {
+                            name: "A09_06",
+                            width: 120,
+                            hide: false,
+                            flexd: true,
+                            formatterClass: function (val) {
+                                return val
+                            },
+                            formatterText: function (val) {
+                                if (val == 'warning') {
+                                    return "异常"
+                                }
+                                return "处理中"
+                            },
+                        }
+
+                    ],
+                    colData: [
+                        {
+                            A09_01: "--",
+                            A09_02: "--",
+                            A09_03: "--",
+                            A09_04: "--",
+                            A09_05: "--",
+                            A09_06: "--",
+                        }
+                    ]
+                },
+                A10: {
+                    colName: ["工单号", "预计投产时间", "当前状态"],
+                    colModel: [
+                        {
+                            name: "A10_01",
+                            widthPer: 50,
+                            hide: false,
+                            flexd: true,
+                        },
+                        {
+                            name: "A10_02",
+                            widthPer: 50,
+                            hide: false,
+                        },
+                        {
+                            name: "A10_06",
+                            width: 120,
+                            hide: false,
+                            flexd: true,
+                            formatterClass: function (val) {
+                                return val
+                            },
+                            formatterText: function (val) {
+                                if (val == 'warning') {
+                                    return "异常"
+                                }
+                                return "处理中"
+                            },
+                        }
+
+                    ],
+                    colData: [
+                        {
+                            A10_01: "--",
+                            A10_02: "--",
+                            A10_03: "--",
+                        }
+                    ]
+                },
+                A11: [
+                    {
+                        title: "手工焊接",
+                        value: 0,
+                        color: "#db8546"
+                    },
+                    {
+                        title: "组装工序",
+                        value: 0,
+                        color: "#2278ea"
+                    },
+                    {
+                        title: "整机组装",
+                        value: 0,
+                        color: "#6acefb"
+                    }
+                ],
+                A12: {
+                    image: "../common/images/shebei.png",
+                    orderNo: "--",
+                    planNo: "--",
+                    finishNo: "--",
+                    finishName: "--",
+                    data: [
+                        {
+                            name: "--",
+                            state: "fixing",
+                            list: [
+                                {
+                                    name: "程序名称",
+                                    value: "--",
+                                },
+                                {
+                                    name: "OEE",
+                                    value: "--",
+                                },
+                                {
+                                    name: "直通率",
+                                    value: "--",
+                                },
+                                // {
+                                //     name: "运行时间",
+                                //     value: "--",
+                                // }
+                            ]
+                        }
+                    ]
+                },
+                A13: {
+                    image: "../common/images/shebei.png",
+                    orderNo: "--",
+                    planNo: "--",
+                    finishNo: "--",
+                    finishName: "--",
+                    data: [
+                        {
+                            name: "--",
+                            state: "fixing",
+                            list: [
+                                {
+                                    name: "程序名称",
+                                    value: "--",
+                                },
+                                {
+                                    name: "OEE",
+                                    value: "--",
+                                },
+                                {
+                                    name: "直通率",
+                                    value: "--",
+                                },
+                                // {
+                                //     name: "运行时间",
+                                //     value: "--",
+                                // }
+                            ]
+                        }
+                    ]
+                },
+                A14: [
+                    {
+                        name: "--",
+                        state: "--",
+                        massge: "缺陷分析",
+                        image: "../common/images/echarts-1.jpg",
+                        labels: [
+                            {
+                                name: "运行时间",
+                                value: "--"
+                            },
+                            {
+                                name: "当前过板数",
+                                value: "--"
+                            }
+                        ],
+                        boards: [
+                            {
+                                name: "通过率",
+                                value: 0,
+                                color: "#6acefb"
+                            },
+                            {
+                                name: "合格率",
+                                value: 0,
+                                color: "#03ec9f"
+                            },
+                            {
+                                name: "异常数",
+                                value: 0,
+                                color: "#db8546"
+                            }
+                        ]
+
+                    },
+                    {
+                        name: "--",
+                        state: "--",
+                        massge: "缺陷分析",
+                        image: "../common/images/echarts-1.jpg",
+                        labels: [
+                            {
+                                name: "运行时间",
+                                value: "--"
+                            },
+                            {
+                                name: "当前过板数",
+                                value: "--"
+                            }
+                        ],
+                        boards: [
+                            {
+                                name: "通过率",
+                                value: 0,
+                                color: "#db8546"
+                            },
+                            {
+                                name: "合格率",
+                                value: 0,
+                                color: "#2278ea"
+                            },
+                            {
+                                name: "异常数",
+                                value: 0,
+                                color: "#6acefb"
+                            }
+                        ]
+
+                    },
+                ],
+                A18: {
+                    stp: "0℃",
+                    t: "0℃",
+                    sth: "0℃",
+                    h: "0℃",
+                },
+                A19: {
+                    day: "11",
+                    week: "30",
+                    month: "120",
+                },
+                A20: ["100", "110", "120", "130", "140", "150", "160", "170", "180", "190", "200", "190"],
+                A21: ["100", "110", "120", "130", "140", "150", "160"],
+                A22: {
+                    listName: [
+                        {
+                            text: "立牌1",
+                            max: 30,
+                        },
+                        {
+                            text: "立牌2",
+                            max: 30,
+                        },
+                        {
+                            text: "立牌3",
+                            max: 30,
+                        },
+                        {
+                            text: "立牌4",
+                            max: 30,
+                        },
+                        {
+                            text: "立牌5",
+                            max: 30,
+                        },
+                    ],
+                    nextWeek: [20, 30, 20, 10, 30],
+                    nowWeek: [10, 20, 10, 30, 10],
+                },
+                /**
+                 * 图标数组JSON格式.
+                 * name 名字 string
+                 * iconfont 图标对应标签 string
+                 * url 接口地址 string
+                 * opentype 打开方式 string "dialog"--对话框 "tab"--新标签
+                 **/
+                iconData:[
+                    {
+                        "name": "2D/3D转换",
+                        "iconfont": "\ue6ce",
+                        "url": "http://www.baidu.com",
+                        "openType": "tab"
+                    },{
+                        "name": "Andon",
+                        "iconfont": "\ue61b",
+                        "url": "http://www.baidu.com",
+                        "openType": "dialog"
+                    },{
+                        "name": "ScaDa",
+                        "iconfont": "\ue615",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "SSOP",
+                        "iconfont": "\ue616",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "Fast Bi",
+                        "iconfont": "\ue617",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "Cloud Label",
+                        "iconfont": "\ue619",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "PASS",
+                        "iconfont": "\ue61a",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "On Line Learning",
+                        "iconfont": "\ue61c",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "IoT",
+                        "iconfont": "\ue6d4",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "EAM",
+                        "iconfont": "\ue64c",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "QMS",
+                        "iconfont": "\ue6ca",
+                        "url": "",
+                        "openType": "dialog"
+                    },{
+                        "name": "Meeting Room",
+                        "iconfont": "\ue6d8",
+                        "url": "",
+                        "openType": "dialog"
+                    }
+                ]
+            },
+            mounted: function () {
+                let _this = this;
+                _this.$initWebGl(); //加载3D模块
+                //构造数据
+                let url = "data/testData.json";
+                let request = new XMLHttpRequest();
+                request.open("get", url); /*设置请求方法与路径*/
+                request.send(null); /*不发送数据到服务器*/
+                request.onload = function () { /*XHR对象获取到返回信息后执行*/
+                    if (request.status == 200) { /*返回状态为200，即为数据获取成功*/
+                        var json = JSON.parse(request.responseText);
+                        // console.log(json);
+                        _this.controller(json)
+                    }
+                }
+                autoTimer = _this.autoChangePage(_this.nextPage);
+
+                // 监听鼠标或者手指交互
+                window.onmousemove = function () {
+                    autoTimer = _this.isInteraction(autoTimer);
+                }
+                // let target = window;
+
+                // 监听鼠标触摸事件.兼容滚动条插件
+                $('.mCustomScrollBox').each(function () {
+                    _this.isTouch($(this)[0]);
+                })
+                _this.isTouch(document);
+
+                //下面注释的是websocket方法.可以直接去掉注释使用
+                //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
+                // _this.socketUrl = 'ws://127.0.0.1:8892/biShow/webSocket';
+                // _this.socket = null;
+                // if (_this.socket != null) {
+                //     _this.socket.close();
+                //     _this.socket = null;
+                // }
+                // _this.socket = new WebSocket(_this.socketUrl);
+                // //打开事件
+                // _this.socket.onopen = function () {
+                //     console.log("websocket已打开");
+                // };
+                // //获得消息事件
+                // _this.socket.onmessage = function (msg) {
+                //     //var serverMsg = "收到服务端信息：" + msg.data;
+                //     let data = $.parseJSON(msg.data);
+                //     if (data.data && data.data.length) {
+                //         _this.controller(data.data)
+                //     }
+                // };
+                // //关闭事件
+                // _this.socket.onclose = function () {
+                //     console.log("websocket已关闭");
+                // };
+                // //发生了错误事件
+                // _this.socket.onerror = function () {
+                //     console.log("websocket发生了错误");
+                // };
+            },
+            methods: {
+
+                //数据控制器
+                controller: function (dataList) {
+                    // console.log(dataList)
+                    let _this = this;
+                    for (let i = 0; i < dataList.length; i++) {
+                        let data = dataList[i].dataValue;
+                        let name = dataList[i].dataName;
+
+                        switch (name) {
+                            case '3D':
+                                if (data.length) _this.D3 = data[0].lineChildrens;
+                                break;
+                            case 'A01':
+                                //年度生产计划达成情况
+                                if (data[0].A01_01) _this.A01[0].value = data[0].A01_01 + "(件)";
+                                if (data[0].A01_02) _this.A01[1].value = data[0].A01_02 + "(件)";
+                                if (data[0].A01_03) _this.A01[2].value = data[0].A01_03 + "(件)";
+                                break;
+
+                            case 'A02':
+                                //进厂质量校验
+                                if (data[0].A02_02) _this.A02.succeed = data[0].A02_02;
+                                if (data[0].A02_03) _this.A02.pass = data[0].A02_03;
+                                if (data[0].A02_04) _this.A02.defeated = data[0].A02_04;
+                                break;
+
+                            case 'A03':
+                                //本月重点项目展示
+                                if (data.length) {
+                                    _this.A03.colData = data;
+                                }
+                                break;
+
+                            case 'A04':
+                                //物料到货情况
+                                if (data.length) {
+                                    _this.A04.colData = data;
+                                }
+                                break;
+
+                            case 'A05':
+                                //安灯超期处理信息
+                                if (data.length) {
+                                    _this.A05.colData = data;
+                                }
+                                break;
+
+                            case 'A07':
+                                //在产工单信息预览
+                                if (data.length) {
+                                    _this.A07[0].value = data[0].A07_01;
+                                    _this.A07[1].value = data[0].A07_02;
+                                    _this.A07[2].value = data[0].A07_03;
+                                }
+                                break;
+
+                            case 'A08':
+                                //成品交付信息预览
+                                if (data.length) {
+                                    _this.A08[0].value = data[0].A08_01;
+                                    _this.A08[1].value = data[0].A08_02;
+                                }
+                                break;
+
+                            case 'A09':
+                                //生产过程中不良展示
+                                if (data.length) {
+                                    _this.A09.colData = data;
+                                }
+                                break;
+
+                            case 'A10':
+                                //工单产前准备情况预览
+                                if (data.length) {
+                                    _this.A10.colData = data;
+                                }
+                                break;
+
+                            case 'A11':
+                                //关键工序直通率
+                                if (data.length) {
+                                    _this.A11[0].value = Number(data[0].A11_01);
+                                    _this.A11[1].value = Number(data[0].A11_02);
+                                    _this.A11[2].value = Number(data[0].A11_03);
+                                }
+                                break;
+
+                            case 'A12':
+                                //SMT1线设备信息
+                                _this.A12.orderNo = dataList[i].orderNo;
+                                _this.A12.planNo = dataList[i].planNo;
+                                _this.A12.finishNo = dataList[i].finishNo;
+                                _this.A12.finishName = dataList[i].finishName;
+                                if (data.length) {
+                                    _this.A12.data = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A12_02;
+                                        d.state = data[i].A12_03;
+                                        d.list = [
+                                            {
+                                                name: "程序名称",
+                                                value: "--",
+                                            },
+                                            {
+                                                name: "OEE",
+                                                value: "--",
+                                            },
+                                            {
+                                                name: "直通率",
+                                                value: "--",
+                                            },
+                                            // {
+                                            //     name: "运行时间",
+                                            //     value: "--",
+                                            // }
+                                        ];
+                                        d.list[0].value = data[i].A12_04;
+                                        d.list[1].value = data[i].A12_05;
+                                        d.list[2].value = data[i].A12_06;
+                                        // d.list[3].value = data[i].A12_07;
+                                        _this.A12.data.push(d);
+                                    }
+                                }
+                                break;
+
+                            case 'A13':
+                                //SMT2线设备信息
+                                _this.A13.orderNo = dataList[i].orderNo;
+                                _this.A13.planNo = dataList[i].planNo;
+                                _this.A13.finishNo = dataList[i].finishNo;
+                                _this.A13.finishName = dataList[i].finishName;
+                                if (data.length) {
+                                    _this.A13.data = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        let d = {};
+                                        d.name = data[i].A13_02;
+                                        d.state = data[i].A13_03;
+                                        d.list = [
+                                            {
+                                                name: "程序名称",
+                                                value: "--",
+                                            },
+                                            {
+                                                name: "OEE",
+                                                value: "--",
+                                            },
+                                            {
+                                                name: "直通率",
+                                                value: "--",
+                                            },
+                                            // {
+                                            //     name: "运行时间",
+                                            //     value: "--",
+                                            // }
+                                        ];
+                                        d.list[0].value = data[i].A13_04;
+                                        d.list[1].value = data[i].A13_05;
+                                        d.list[2].value = data[i].A13_06;
+                                        // d.list[3].value = data[i].A13_07;
+                                        _this.A13.data.push(d);
+                                    }
+                                }
+                                break;
+
+                            case 'A14':
+                                //选焊设备
+                                if (data.length) {
+                                    _this.A14[0].name = data[0].A14_01 || "--";
+                                    _this.A14[0].state = data[0].A14_02 || "--";
+                                    _this.A14[0].labels[0].value = data[0].A14_08 || "--";
+                                    _this.A14[0].labels[1].value = data[0].A14_04 || 0;
+                                    _this.A14[0].boards[0].value = data[0].A14_05 || 0;
+                                    _this.A14[0].boards[1].value = data[0].A14_06 || 0;
+                                    _this.A14[0].boards[2].value = data[0].A14_07 || 0;
+                                }
+                                break;
+
+                            case 'A16':
+                                //波峰焊
+                                if (data.length) {
+                                    _this.A14[1].name = data[0].A16_01 || "--";
+                                    _this.A14[1].state = data[0].A16_02 || "--";
+                                    _this.A14[1].labels[0].value = data[0].A16_08 || "--";
+                                    _this.A14[1].labels[1].value = data[0].A16_04 || 0;
+                                    _this.A14[1].boards[0].value = data[0].A16_05 || 0;
+                                    _this.A14[1].boards[1].value = data[0].A16_06 || 0;
+                                    _this.A14[1].boards[2].value = data[0].A16_07 || 0;
+                                }
+                                break;
+
+                            case 'A18':
+                                //环境温湿度
+                                if (data.length) {
+                                    _this.A18.stp = data[0].A18_01 || 0;
+                                    _this.A18.t = data[0].A18_03 || 0;
+                                    _this.A18.sth = data[0].A18_02 || 0;
+                                    _this.A18.h = data[0].A18_04 || 0;
+                                }
+                                break;
+
+                            case 'A19':
+                                //环境温湿度
+                                if (data.length) {
+                                    _this.A19.day = data[0].A19_01 || 0;
+                                    _this.A19.week = data[0].A19_02 || 0;
+                                    _this.A19.month = data[0].A19_03 || 0;
+                                }
+                                break;
+
+                            case 'A20':
+                                //环境温湿度
+                                if (data.length) {
+                                    _this.A20[0] = data[0].A20_01 || 0;
+                                    _this.A20[1] = data[0].A20_02 || 0;
+                                    _this.A20[2] = data[0].A20_03 || 0;
+                                    _this.A20[3] = data[0].A20_04 || 0;
+                                    _this.A20[4] = data[0].A20_05 || 0;
+                                    _this.A20[5] = data[0].A20_06 || 0;
+                                    _this.A20[6] = data[0].A20_07 || 0;
+                                    _this.A20[7] = data[0].A20_08 || 0;
+                                    _this.A20[8] = data[0].A20_09 || 0;
+                                    _this.A20[9] = data[0].A20_10 || 0;
+                                    _this.A20[10] = data[0].A20_11 || 0;
+                                    _this.A20[11] = data[0].A20_12 || 0;
+                                }
+                                break;
+
+                            case 'A21':
+                                //环境温湿度
+                                if (data.length) {
+                                    _this.A21[0] = data[0].A21_01 || 0;
+                                    _this.A21[1] = data[0].A21_02 || 0;
+                                    _this.A21[2] = data[0].A21_03 || 0;
+                                    _this.A21[3] = data[0].A21_04 || 0;
+                                    _this.A21[4] = data[0].A21_05 || 0;
+                                    _this.A21[5] = data[0].A21_06 || 0;
+                                    _this.A21[6] = data[0].A21_07 || 0;
+                                }
+                                break;
+                        }
+                    }
+                },
+                //控制3d看板主板收放
+                cardunfold: function (val) {
+                    if (!val) {
+                        this.layout3D[4].col = 6
+                    } else {
+                        this.layout3D[4].col = 18
+                    }
+                },
+                //跳转上一页
+                lastPage: function (data) {
+                    // console.log("last")
+                    let index = this.indexPage;
+                    index--;
+                    if (index < 1) index = 4;
+                    this.indexPage = index;
+                },
+                //跳转下一页
+                nextPage: function (data) {
+                    // console.log("next");
+                    let index = this.indexPage;
+                    index++;
+                    if (index > 4) index = 1;
+                    this.indexPage = index;
+                },
+
+                //无操作跳转到下一页
+                autoChangePage: function (callback) {
+                    this.timer = setInterval(() => {
+                        if(this.autoChange){
+                            callback();
+                        }
+                    }, 5000);
+                    return this.timer;
+                },
+                //是否有交互
+                isInteraction: function () {
+                    let newTimer = null;
+                    clearInterval(this.timer);
+                    return this.autoChangePage(this.nextPage);
+                },
+                //是否有鼠标触摸,兼容滚动条插件
+                isTouch: function (ele) {
+                    let _this = this;
+                    ele.addEventListener("touchstart", function (e) {
+                        e.target.addEventListener("touchmove", function () {
+                            autoTimer = _this.isInteraction(autoTimer);
+                        })
+                    })
+                },
+
+                //关闭3d设备弹出窗
+                upBoxClose: function () {
+                    this.upBox = false
+                },
+                //点击3d设备模型
+                click3dModel: function (e) {
+                    this.upBoxModelData.elem = e;
+                    this.upBox = true
+                },
+                openDialog: function (data) {
+                    this.dialogdata = data;
+                    this.dialogShow = true;
+                    this.autoChange = false; // 打开弹框,关闭自动换页
+                },
+                closeDialog: function () {
+                    this.dialogShow = false;
+                    this.autoChange = true; // 关闭弹框,打开自动换页
+                },
+                changePage:function(index){
+                    this.indexPage = index + 1;
+                    clearInterval(this.timer);
+                    return this.autoChangePage(this.nextPage);
+                }
+            },
+            watch: {
+                //监听显示第几页变化
+                indexPage: function (val) {
+                    switch (val) {
+                        case 1:
+                            this.headr.indexPage = "1";
+                            break
+                        case 2:
+                            this.headr.indexPage = "2";
+                            break
+                        case 3:
+                            this.headr.indexPage = "3";
+                            break
+                        case 4:
+                            this.headr.indexPage = "4";
+                            break
+                    }
+                }
+            }
+        });
+
+    });
+    
+</script>
+</html>
