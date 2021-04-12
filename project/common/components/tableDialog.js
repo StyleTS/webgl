@@ -4,8 +4,10 @@ Vue.component('tableDialog', {
         <div id="dialog">
             <div class="table-wrap" @diyScroll="">
                 <span class="close-dialog" v-on:click="onClose"><i class="iconfont icon-guanbi1"></i></span>
-                <h1>{{propsdata.title}}</h1>
-                <div class="custom-table">
+                <iframe v-if="propsdata.iframe" :style="styleObject" :src="propsdata.url" frameborder="0"></iframe>
+                <div v-else>
+                    <h1>{{propsdata.title}}</h1>
+                    <div class="custom-table">
                         <ul>
                             <li class="th"><span v-for="(item,index) in propsdata.colName">{{item}}</span></li>
                         </ul>
@@ -14,12 +16,21 @@ Vue.component('tableDialog', {
                                 <li class="tr" v-for="(item,index) in propsdata.data"><span v-for="(value,key,index) in item" :class="{progress : key === 'progress'}" :style="{'backgroundSize':value + '% 100%'}">{{key === 'progress' ?  value + '%' : value}}</span></li>
                             </ul>
                         </div>
+                    </div>
                 </div>
+                
             </div>
         </div>
      `,
     data: function () {
-        return {}
+        return {
+            styleObject: {
+                width: "100%",
+                height: "100%",
+                border: "0",
+                overfollow: "hidden"
+            }
+        }
     },
     props: {
         propsdata: {

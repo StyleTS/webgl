@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import "reset.css";
-html, body {
+html,
+body {
   display: block;
   width: 100%;
   min-width: 1200px;
@@ -18,7 +19,8 @@ html, body {
   padding: 0;
 }
 
-ul, li {
+ul,
+li {
   list-style-type: none;
   list-style: none;
 }
@@ -168,7 +170,8 @@ ul, li {
   height: 80%;
   width: auto;
 }
-.headCenterBox > div .btn-left, .headCenterBox > div .btn-right {
+.headCenterBox > div .btn-left,
+.headCenterBox > div .btn-right {
   position: absolute;
   bottom: 0;
   background-repeat: no-repeat;
@@ -184,7 +187,8 @@ ul, li {
   bottom: 0.07rem;
   outline: none;
 }
-.headCenterBox > div .btn-left:active, .headCenterBox > div .btn-right:active {
+.headCenterBox > div .btn-left:active,
+.headCenterBox > div .btn-right:active {
   opacity: 0.6;
 }
 .headCenterBox > div .btn-left {
@@ -203,6 +207,13 @@ ul, li {
   width: 50%;
   height: 100%;
   top: 0;
+}
+.headCenterBox .page-change.head-left {
+  left: 0;
+  text-align: left;
+  padding-left: 0.3rem;
+}
+.headCenterBox .page-change.head-right {
   right: 0;
   text-align: right;
   padding-right: 0.3rem;
@@ -213,7 +224,7 @@ ul, li {
   background-color: transparent;
   background-image: url("../images/page-button.png");
   width: 1.3rem;
-  height: calc( 1.3rem * 28 / 114 );
+  height: calc(1.3rem * 28 / 114);
   background-size: 100% auto;
   background-repeat: no-repeat;
   color: #fff;
@@ -355,11 +366,14 @@ ul, li {
   background: url(../images/mainFromContentBg.png) repeat;
   background-clip: padding-box;
 }
+.cardArrowBox.long.no-arrow:before {
+  border-image-source: url(../images/mainFromBg-1.png);
+}
 .cardArrowBox.long .arrow {
   display: block;
   position: absolute;
   width: 31px;
-  height: calc( 100% - 152px );
+  height: calc(100% - 152px);
   background: url(../images/mainFromArrow.png) center center no-repeat;
   right: -17px;
   top: 50%;
@@ -371,7 +385,7 @@ ul, li {
   display: block;
   background: url(../images/mainFrom4-1.png) repeat-y left center;
   width: 13px;
-  height: calc( 50% - 36px);
+  height: calc(50% - 36px);
   position: absolute;
   left: 1px;
   z-index: 1;
@@ -438,66 +452,80 @@ ul, li {
   z-index: 100;
 }
 
-.shiftLeft-enter-active, .shiftLeft-leave-active {
+.shiftLeft-enter-active,
+.shiftLeft-leave-active {
   left: 0;
   transition: left 0.4s;
 }
 
-.shiftLeft-enter, .shiftLeft-leave-to {
+.shiftLeft-enter,
+.shiftLeft-leave-to {
   left: -400px;
 }
 
-.shiftLeft2-enter-active, .shiftLeft2-leave-active {
+.shiftLeft2-enter-active,
+.shiftLeft2-leave-active {
   left: 0;
   transition: left 0.5s;
 }
 
-.shiftLeft2-enter, .shiftLeft2-leave-to {
+.shiftLeft2-enter,
+.shiftLeft2-leave-to {
   left: -400px;
 }
 
-.shiftRight-enter-active, .shiftRight-leave-active {
+.shiftRight-enter-active,
+.shiftRight-leave-active {
   left: 0;
   transition: left 0.4s;
 }
 
-.shiftRight-enter, .shiftRight-leave-to {
+.shiftRight-enter,
+.shiftRight-leave-to {
   left: 400px;
 }
 
-.shiftRight2-enter-active, .shiftRight2-leave-active {
+.shiftRight2-enter-active,
+.shiftRight2-leave-active {
   left: 0;
   transition: left 0.5s;
 }
 
-.shiftRight2-enter, .shiftRight2-leave-to {
+.shiftRight2-enter,
+.shiftRight2-leave-to {
   left: 400px;
 }
 
-.shiftBottom-enter-active, .shiftBottom-leave-active {
+.shiftBottom-enter-active,
+.shiftBottom-leave-active {
   top: 0;
   transition: top 0.6s;
 }
 
-.shiftBottom-enter, .shiftBottom-leave-to {
+.shiftBottom-enter,
+.shiftBottom-leave-to {
   top: 400px;
 }
 
-.shiftTop-enter-active, .shiftTop-leave-active {
+.shiftTop-enter-active,
+.shiftTop-leave-active {
   top: 0;
   transition: top 0.6s;
 }
 
-.shiftTop-enter, .shiftTop-leave-to {
+.shiftTop-enter,
+.shiftTop-leave-to {
   top: -400px;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   opacity: 1;
   transition: opacity 0.6s;
 }
 
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -579,8 +607,8 @@ ul, li {
 .labelChart2 > div > div > span {
   background-image: url(../images/border.png);
   background-size: 100% 100%;
-  height: calc( 100% - 1.06rem);
-  line-height: calc( 100% - 1.06rem);
+  height: calc(100% - 1.06rem);
+  line-height: calc(100% - 1.06rem);
   margin-top: 0.1rem;
   width: 80%;
   margin-left: 10%;
@@ -654,6 +682,80 @@ ul, li {
   font-size: 0.28rem;
   padding-left: 0.1rem;
   color: #22ffff;
+}
+
+.labelChart4 .listBox_quality {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.12rem;
+}
+.labelChart4 .listBox_quality .list-item {
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 1.25rem;
+  background: #d0712d;
+  background-clip: content-box;
+  position: relative;
+}
+.labelChart4 .listBox_quality .list-item::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-color: rgba(0, 0, 0, 0.5);
+  border-width: 20px;
+  border-style: solid;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  background-image: url(../images/border.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.labelChart4 .listBox_quality .list-item span {
+  width: 35%;
+  text-align: center;
+  font-size: 0.2rem;
+  color: #00eeff;
+  padding-right: 3px;
+}
+.labelChart4 .listBox_quality .list-item span:nth-child(2n) {
+  width: 65%;
+  font-size: 0.17rem;
+  color: #fff;
+  text-align: left;
+  padding-left: 3px;
+}
+.labelChart4 .progress_quality {
+  padding: 0 0.22rem;
+  background: #0f1d38;
+  color: #fff;
+  height: 0.5rem;
+  background-clip: content-box;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.labelChart4 .progress_quality span {
+  font-size: 0.2rem;
+  width: 150px;
+  text-align: center;
+}
+.labelChart4 .progress_quality p {
+  width: calc(100% - 150px);
+  text-align: right;
+  padding: 0.05rem;
+  background: #3f4a60;
+  background-clip: content-box;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 50% 100%;
+  background-image: url(../images/bg-progress.png);
+  background-repeat: no-repeat;
 }
 
 .qualityStat {

@@ -9,7 +9,7 @@ Vue.component('listTable', {
         <div class="listTableCenter">
         <div ref="messageList">
             <ul>
-                <li v-for="(val2,item2) in propdata.colData" :key="val2.id?val2.id:item2">
+                <li v-for="(val2,item2) in propdata.colData" @click="rowOnClick(item2)" :key="val2.id?val2.id:item2">
                     <div v-for="(val3,item3) in propdata.colModel" :key="item3" :style="getStyle(item3)">
                         <div :style="getTextShowStyle(item3)" v-if="val3.formatterClass">
                             <span :class="val3.formatterClass(val2[val3.name])">
@@ -49,6 +49,11 @@ Vue.component('listTable', {
         flex: {
             type: Boolean,
             default: false,
+        },
+        // 行点击事件
+        rowclick:{
+            type: Boolean,
+            default: false,
         }
     },
     mounted: function () {
@@ -59,6 +64,194 @@ Vue.component('listTable', {
         });
     },
     methods: {
+        rowOnClick: function (index) {
+            if (!this.rowclick) return false;
+            console.log("触发了点击事件" + index);
+
+            let data = {};
+
+            // 构造数据,下面通过url获取数据后,这段可删除
+            data = {
+                "title": "数据名字",
+                "colName": ["机器", "机器类型", "机器编码", "机器状态", "登记时间","进度"],
+                "data": [{
+                    "name": "打印机1",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "55"
+                }, {
+                    "name": "打印机2",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "100"
+                }, {
+                    "name": "打印机3",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "25"
+                }, {
+                    "name": "打印机4",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, {
+                    "name": "打印机5",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "95"
+                }, {
+                    "name": "打印机6",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "60"
+                }, {
+                    "name": "打印机7",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "30"
+                }, {
+                    "name": "打印机8",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "20"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "36"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "19"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "15"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "4"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "88"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "10"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "12"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, {
+                    "name": "打印机9",
+                    "type": "固定资产",
+                    "machineno": "PG34578983",
+                    "status": "normal",
+                    "time": "2021-03-21",
+                    "progress": "50"
+                }, ]
+            }
+
+            // 弹框打开,下面执行网络请求
+            // axios.post(url, {
+            //         // 这里是所传输的data..
+            //         //  传值给父组件,执行打开弹框,data为网络请求后的数据
+            this.$emit("dialogonopen", data);
+            //     })
+            //     .then(function (response) {
+            //         console.log('成功后执行');
+            //         console.log('response');
+            //     })
+            //     .catch(function (error) {
+            //         console.log("打印错误" + error);
+            //     });
+        },
         getTextShowStyle: function (item) {
             let style = {};
             let colModel = this.propdata.colModel;

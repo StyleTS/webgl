@@ -1,20 +1,23 @@
 //卡片包容块内容
 Vue.component('cardType2', {
     template: `
-    <div :class="long?'cardArrowBox  long':'cardArrowBox'">
+    <div :class="showClass" >
         <p class="cardTitle" :title="title">{{title}}</p>
         <div class="cardCenter">
         <div class="cardCenterBox">
                 <slot></slot>
             </div>
         </div>
-        <span v-if="long" class="arrow" v-on:click="flex">
+        <span v-if="arrowType" class="arrow" v-on:click="flex">
             <i :class="unfoldBox?'':'flex'"></i>
         </span>
     </div>`,
     data:function(){
+        
         return {
             unfoldBox:true,
+            arrowType: this.showArrow(),
+            showClass: this.boxClass(),
         }
     },
     props: {
@@ -30,6 +33,10 @@ Vue.component('cardType2', {
             type: Boolean,
             default: false
         },
+        arrow:{
+            type: Boolean,
+            default: true
+        },
     },
     mounted: function () {
         this.unfoldBox = this.unfold;
@@ -38,6 +45,22 @@ Vue.component('cardType2', {
         flex:function(){
             this.unfoldBox = !this.unfoldBox;
             this.$emit("unfold",this.unfoldBox)
+        },
+        boxClass : function () {
+            let className = ""
+            if (this.long && !this.arrow) {
+                className = "cardArrowBox long no-arrow"
+            }else if (this.long && this.arrow) {
+                className = "cardArrowBox long"
+            }else{
+                className = "cardArrowBox"
+            }
+            console.log(this.title, this.long,this.arrow , "=============" + className);
+            return className;
+        },
+        showArrow : function () {
+            console.log( this.title , "this.long && this.arrow", this.long && this.arrow );
+            return (this.long && this.arrow);
         }
     }
 })

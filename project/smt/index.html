@@ -70,6 +70,7 @@
     <script src="../common/components/labelChart1.js"></script>
     <script src="../common/components/labelChart2.js"></script>
     <script src="../common/components/labelChart3.js"></script>
+    <script src="../common/components/labelChart4.js"></script>
     <script src="../common/components/qualityStat.js"></script>
     <script src="../common/components/listTable.js"></script>
     <script src="../common/components/echartLoop.js"></script>
@@ -110,10 +111,34 @@
                 </div>
             </template>
             <template slot="conter">
+                <conter-layout :layout="layoutQualityBoard" v-show="indexPage==5">
+                    <template slot="block1">
+                        <transition name="shiftLeft">
+                            <card-type2 :long=true :arrow=false v-show="indexPage==5" title="在产工单信息预览">
+                                <label-chart4 :propdata="A07_1"></label-chart2>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block2">
+                        <transition name="shiftLeft">
+                            <card-type2 :long=true :arrow=false v-show="indexPage==5" title="年度产能趋势">
+                                <year-chart :change-init="indexPage==5" :propdata="A20"></year-chart>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block3">
+                        <transition name="shiftRight">
+                            <card-type2 :long=true :arrow=false v-show="indexPage==5" title="工单产前准备情况预览>>" v-on:unfold="cardunfold">
+                                <list-table :propdata="A09" @dialogonopen="openDialog" :rowclick="true" :flex="layout3D[4].col == 6"></list-table>
+                            </card-type2>
+                        </transition>
+                    </template>
+                </conter-layout>
                 <conter-layout :layout="layoutBoard" v-show="indexPage==4">
                     <template slot="iconList">
                         <transition name="shiftLeft">
-                            <icon-list @dialogonopen="openDialog" v-show="indexPage==4" :propdata="iconData"></icon-list>
+                            <icon-list @dialogonopen="openDialog" v-show="indexPage==4" :propdata="iconData">
+                            </icon-list>
                         </transition>
                     </template>
                 </conter-layout>
@@ -217,7 +242,8 @@
 
                 <conter-layout :layout="layout3D" v-show="indexPage==3">
                     <div class="centerBox" style="position: relative">
-                        <div class="webGLBox_main" id="contontBox" style="height: 100%;width: 100%;position: relative;padding: 0;"></div>
+                        <div class="webGLBox_main" id="contontBox"
+                            style="height: 100%;width: 100%;position: relative;padding: 0;"></div>
                     </div>
                     <template slot="block1">
                         <transition name="shiftLeft">
@@ -294,7 +320,7 @@
                         </li> -->
                     </ul>
                 </div>
-                <div class="listContenBox list-box" >
+                <div class="listContenBox list-box">
                     <div class="item agv-info">
                         <h1>设备状态</h1>
                         <div class="agv-status clearfix">
@@ -380,7 +406,7 @@
             el: '#app',
             data: {
                 //新增定义变量开始
-                dialogShow : false, // 弹框开关
+                dialogShow: false, // 弹框开关
                 autoChange: true,   //自动换页开关
                 dialogdata: {},
                 indexPage: 1,
@@ -391,12 +417,33 @@
                     logo1Url: "../common/images/Pangus-logo.png",
                     logo1Ur2: "",
                     // 修改button
-                    buttonList: ["铁路地图","综合看板","3D看板","数据汇总"],
+                    buttonList: ["铁路地图", "综合看板", "3D看板", "数据汇总","重点事项","预留看板1","预留看板2","预留看板3"],
                     indexPage: "1",
                 },
                 name: '1',
                 upBox: false,
-                layoutBoard:[
+                layoutQualityBoard: [
+                    {
+                        name: "block1",
+                        col: 8,
+                        cor: 12,
+                        top: 0,
+                        left: 0
+                    },{
+                        name: "block2",
+                        col: 8,
+                        cor: 12,
+                        top: 12,
+                        left: 0
+                    },{
+                        name: "block3",
+                        col: 16,
+                        cor: 24,
+                        top: 0,
+                        left: 8
+                    }
+                ],
+                layoutBoard: [
                     {
                         name: "iconList",
                         col: 18,
@@ -696,7 +743,7 @@
                     ]
                 },
                 A06: [
-                    { "name": "京津线", "lineName": "jjLine", "pointName": ["华南东莞总部PCB线", "华东昆山PCB线", "华北北京SMT线", "西南重庆SMT线"], "coordinate": [[113.23, 23.16], [120.48, 31.06], [116.20, 39.56], [106.55, 29.57]],"link":["../pcb/","../pcb/","../smt/","../smt/"] }
+                    { "name": "京津线", "lineName": "jjLine", "pointName": ["华南东莞总部PCB线", "华东昆山PCB线", "华北北京SMT线", "西南重庆SMT线"], "coordinate": [[113.23, 23.16], [120.48, 31.06], [116.20, 39.56], [106.55, 29.57]], "link": ["../pcb/", "../pcb/", "../smt/", "../smt/"] }
                 ],
                 A07: [
                     {
@@ -712,6 +759,36 @@
                         value: 0,
                     }
                 ],
+                A07_1: {
+                    "type": "quality",
+                    "data": [
+                        {
+                            title: "月目标产值",
+                            value: 110,
+                        },
+                        {
+                            title: "月实际产值",
+                            value: 120,
+                        },
+                        {
+                            title: "月完工台件",
+                            value: 100000,
+                        },
+                        {
+                            title: "月目标台件",
+                            value: 120000,
+                        },
+                        {
+                            title: "月目标产品种类数量",
+                            value: 600,
+                        },
+                        {
+                            title: "月达成产品种类数量",
+                            value: 700,
+                        }
+                    ],
+                    "progress": "80"
+                },
                 A08: [
                     {
                         text: "周交付台件",
@@ -1012,65 +1089,65 @@
                  * name 名字 string
                  * iconfont 图标对应标签 string
                  * url 接口地址 string
-                 * opentype 打开方式 string "dialog"--对话框 "tab"--新标签
+                 * opentype 打开方式 string "dialog"--对话框 "tab"--新标签 "iframe"--iframe
                  **/
-                iconData:[
+                iconData: [
                     {
                         "name": "2D/3D转换",
                         "iconfont": "\ue6ce",
                         "url": "http://www.baidu.com",
                         "openType": "tab"
-                    },{
+                    }, {
                         "name": "Andon",
                         "iconfont": "\ue61b",
                         "url": "http://www.baidu.com",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "ScaDa",
                         "iconfont": "\ue615",
-                        "url": "",
-                        "openType": "dialog"
-                    },{
+                        "url": "http://www.baidu.com",
+                        "openType": "iframe"
+                    }, {
                         "name": "SSOP",
                         "iconfont": "\ue616",
                         "url": "",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "Fast Bi",
                         "iconfont": "\ue617",
                         "url": "",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "Cloud Label",
                         "iconfont": "\ue619",
                         "url": "",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "PASS",
                         "iconfont": "\ue61a",
                         "url": "",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "On Line Learning",
                         "iconfont": "\ue61c",
                         "url": "",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "IoT",
                         "iconfont": "\ue6d4",
                         "url": "",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "EAM",
                         "iconfont": "\ue64c",
                         "url": "",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "QMS",
                         "iconfont": "\ue6ca",
                         "url": "",
                         "openType": "dialog"
-                    },{
+                    }, {
                         "name": "Meeting Room",
                         "iconfont": "\ue6d8",
                         "url": "",
@@ -1395,7 +1472,7 @@
                     // console.log("last")
                     let index = this.indexPage;
                     index--;
-                    if (index < 1) index = 4;
+                    if (index < 1) index = 5;
                     this.indexPage = index;
                 },
                 //跳转下一页
@@ -1403,14 +1480,14 @@
                     // console.log("next");
                     let index = this.indexPage;
                     index++;
-                    if (index > 4) index = 1;
+                    if (index > 5) index = 1;
                     this.indexPage = index;
                 },
 
                 //无操作跳转到下一页
                 autoChangePage: function (callback) {
                     this.timer = setInterval(() => {
-                        if(this.autoChange){
+                        if (this.autoChange) {
                             callback();
                         }
                     }, 5000);
@@ -1450,7 +1527,7 @@
                     this.dialogShow = false;
                     this.autoChange = true; // 关闭弹框,打开自动换页
                 },
-                changePage:function(index){
+                changePage: function (index) {
                     this.indexPage = index + 1;
                     clearInterval(this.timer);
                     return this.autoChangePage(this.nextPage);
@@ -1459,25 +1536,13 @@
             watch: {
                 //监听显示第几页变化
                 indexPage: function (val) {
-                    switch (val) {
-                        case 1:
-                            this.headr.indexPage = "1";
-                            break
-                        case 2:
-                            this.headr.indexPage = "2";
-                            break
-                        case 3:
-                            this.headr.indexPage = "3";
-                            break
-                        case 4:
-                            this.headr.indexPage = "4";
-                            break
-                    }
+                    this.headr.indexPage = val;
                 }
             }
         });
 
     });
-    
+
 </script>
+
 </html>

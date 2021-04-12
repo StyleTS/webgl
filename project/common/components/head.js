@@ -16,8 +16,11 @@ Vue.component('headTop', {
                         <img :src="headr.logo1Url" v-if="headr.logo1Url">
                     </span>
                 </div>
-                <div class="page-change">
-                    <button class="page-change-btn" v-for="(item,index) in headr.buttonList"  v-on:click="clickChangePage(index)" :class="{active : parseInt(headr.indexPage) === (index + 1)}">{{item}}</button>
+                <div class="page-change head-left">
+                    <button class="page-change-btn" v-for="(item,index) in headr.buttonList" :data="index" :data11="headr.indexPage" v-if="index < 4"  v-on:click="clickChangePage(index)" :class="{active : parseInt(headr.indexPage) === (index + 1)}">{{item}}{{index+1}}</button>
+                </div>
+                <div class="page-change head-right">
+                    <button class="page-change-btn" v-for="(item,index) in headr.buttonList" :data="index" :data11="headr.indexPage" v-if="index >= 4"  v-on:click="clickChangePage(index)" :class="{active : parseInt(headr.indexPage) === (index + 1)}">{{item}}{{index+1}}</button>
                 </div>
             </div>
         </div>

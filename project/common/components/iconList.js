@@ -205,6 +205,12 @@ Vue.component("iconList", {
                 case "tab":
                     window.open(url, "_blank");
                     break;
+                case "iframe":
+                    let option = {
+                        "url": url,
+                        "iframe": true,
+                    }
+                    this.$emit("dialogonopen", option);
             }
         }
     }
