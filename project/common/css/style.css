@@ -557,7 +557,7 @@ body {
 }
 #dialog .table-wrap .custom-table .table-content {
   width: 100%;
-  max-height: calc( 100% - 50px );
+  height: calc( 100% - 50px );
   overflow: hidden;
 }
 #dialog .table-wrap .custom-table ul li {

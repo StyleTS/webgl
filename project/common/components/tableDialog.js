@@ -5,7 +5,7 @@ Vue.component('tableDialog', {
             <div class="table-wrap" @diyScroll="">
                 <span class="close-dialog" v-on:click="onClose"><i class="iconfont icon-guanbi1"></i></span>
                 <iframe v-if="propsdata.iframe" :style="styleObject" :src="propsdata.url" frameborder="0"></iframe>
-                <div v-else>
+                <template v-else>
                     <h1>{{propsdata.title}}</h1>
                     <div class="custom-table">
                         <ul>
@@ -17,7 +17,7 @@ Vue.component('tableDialog', {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </template>
                 
             </div>
         </div>
@@ -58,6 +58,7 @@ Vue.component('tableDialog', {
     },
     mounted: function () {
         //调用JQ滚动条插件
+        console.log($("#dialog").find('.table-wrap .custom-table .table-content'));
         $("#dialog").find('.table-wrap .custom-table .table-content').mCustomScrollbar({
             theme: 'minimal',
             scrollInertia: 550,

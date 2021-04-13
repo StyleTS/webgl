@@ -613,7 +613,7 @@ body {
 			height: 100%;
 			.table-content{
 				width: 100%;
-				max-height: calc( 100% -  50px );
+				height: calc( 100% -  50px );
 				overflow: hidden;
 			}
 			ul{
