@@ -20,7 +20,7 @@ Vue.component('headTop', {
                     <button class="page-change-btn" v-for="(item,index) in headr.buttonList" :data="index" :data11="headr.indexPage" v-if="index < 4"  v-on:click="clickChangePage(index)" :class="{active : parseInt(headr.indexPage) === (index + 1)}">{{item}}{{index+1}}</button>
                 </div>
                 <div class="page-change head-right">
-                    <button class="page-change-btn" v-for="(item,index) in headr.buttonList" :data="index" :data11="headr.indexPage" v-if="index >= 4"  v-on:click="clickChangePage(index)" :class="{active : parseInt(headr.indexPage) === (index + 1)}">{{item}}{{index+1}}</button>
+                    <button class="page-change-btn" v-for="(item,index) in headr.buttonList" :data="index" :data11="headr.indexPage" v-if="index >= 4"  v-on:click="clickChangePage(index)" :class="{active : parseInt(headr.indexPage) === (index + 1)}">{{item}}</button>
                 </div>
             </div>
         </div>

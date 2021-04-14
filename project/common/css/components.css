@@ -596,6 +596,7 @@ li {
   height: 100%;
   float: left;
   overflow: hidden;
+  cursor: pointer;
 }
 .labelChart2 > div > div > p {
   display: block;

@@ -74,6 +74,7 @@
     <script src="../common/components/qualityStat.js"></script>
     <script src="../common/components/listTable.js"></script>
     <script src="../common/components/echartLoop.js"></script>
+    <script src="../common/components/dashBoard.js"></script>
     <script src="../common/components/devInfo.js"></script>
     <script src="../common/components/devInfo2.js"></script>
     <script src="../common/components/vitalDevInfo.js"></script>
@@ -82,6 +83,7 @@
     <script src="../common/components/yearChart.js"></script>
     <script src="../common/components/weekChart.js"></script>
     <script src="../common/components/flawChart.js"></script>
+    <script src="../common/components/pieChart.js"></script>
     <script src="../common/components/bigMap.js"></script>
     <script src="../common/components/upBox.js"></script>
     <script src="../common/components/tableDialog.js"></script>
@@ -111,11 +113,52 @@
                 </div>
             </template>
             <template slot="conter">
+                <conter-layout :layout="layoutCheckBoard" v-show="indexPage==6">
+                    <template slot="block1">
+                        <transition name="shiftLeft">
+                            <card-type2 :long=true :arrow=false v-show="indexPage==6" title="在产工单信息预览">
+                                <label-chart2 @dialogonopen="openDialog" :itemclick="true" :propdata="A07_2">
+                                </label-chart2>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block2">
+                        <transition name="shiftLeft2">
+                            <card-type2 :long=true :arrow=false v-show="indexPage==6" title="工单产前准备情况预览>>"
+                                v-on:unfold="cardunfold">
+                                <list-table :propdata="A09" :flex="layout3D[4].col == 6"></list-table>
+                            </card-type2>
+                        </transition>a
+                    </template>
+                    <template slot="block3">
+                        <transition name="shiftRight">
+                            <card-type2 :long=true :arrow=false v-show="indexPage==6" title="检验及时率">
+                                <dash-board :propdata="dashBoardData" :change-init="indexPage==6">
+                                </dash-board>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block4">
+                        <transition name="shiftRight">
+                            <card-type2 :long=true :arrow=false v-show="indexPage==6" title="进料检验不合格类型分布图">
+                                <pie-chart :propdata="pieChartData" :change-init="indexPage==6"></pie-chart>
+                            </card-type2>
+                        </transition>
+                    </template>
+                    <template slot="block5">
+                        <transition name="shiftRight2">
+                            <card-type2 :long=true :arrow=false v-show="indexPage==6" title="进料检验合格率趋势图">
+                                <year-chart :change-init="indexPage==6" :propdata="A20"></year-chart>
+                            </card-type2>
+                        </transition>
+                    </template>
+                </conter-layout>
                 <conter-layout :layout="layoutQualityBoard" v-show="indexPage==5">
                     <template slot="block1">
                         <transition name="shiftLeft">
                             <card-type2 :long=true :arrow=false v-show="indexPage==5" title="在产工单信息预览">
-                                <label-chart4 :propdata="A07_1"></label-chart2>
+                                <label-chart4 :propdata="A07_1">
+                                    </label-chart2>
                             </card-type2>
                         </transition>
                     </template>
@@ -128,8 +171,10 @@
                     </template>
                     <template slot="block3">
                         <transition name="shiftRight">
-                            <card-type2 :long=true :arrow=false v-show="indexPage==5" title="工单产前准备情况预览>>" v-on:unfold="cardunfold">
-                                <list-table :propdata="A09" @dialogonopen="openDialog" :rowclick="true" :flex="layout3D[4].col == 6"></list-table>
+                            <card-type2 :long=true :arrow=false v-show="indexPage==5" title="工单产前准备情况预览>>"
+                                v-on:unfold="cardunfold">
+                                <list-table :propdata="A09" @dialogonopen="openDialog" :rowclick="true"
+                                    :flex="layout3D[4].col == 6"></list-table>
                             </card-type2>
                         </transition>
                     </template>
@@ -409,7 +454,7 @@
                 dialogShow: false, // 弹框开关
                 autoChange: true,   //自动换页开关
                 dialogdata: {},
-                indexPage: 5,
+                indexPage: 1,
                 timer: "",
                 //新增定义变量结束
                 headr: {
@@ -417,11 +462,44 @@
                     logo1Url: "../common/images/Pangus-logo.png",
                     logo1Ur2: "",
                     // 修改button
-                    buttonList: ["铁路地图", "综合看板", "3D看板", "数据汇总","重点事项","预留看板1","预留看板2","预留看板3"],
+                    buttonList: ["铁路地图", "综合看板", "3D看板", "数据汇总", "重点事项", "质量检查", "预留看板2", "预留看板3"],
                     indexPage: "1",
                 },
                 name: '1',
                 upBox: false,
+                layoutCheckBoard: [
+                    {
+                        name: "block1",
+                        col: 12,
+                        cor: 6,
+                        top: 0,
+                        left: 0
+                    }, {
+                        name: "block2",
+                        col: 12,
+                        cor: 18,
+                        top: 6,
+                        left: 0
+                    }, {
+                        name: "block3",
+                        col: 6,
+                        cor: 12,
+                        top: 0,
+                        left: 12
+                    }, {
+                        name: "block4",
+                        col: 6,
+                        cor: 12,
+                        top: 0,
+                        left: 18
+                    }, {
+                        name: "block5",
+                        col: 12,
+                        cor: 12,
+                        top: 12,
+                        left: 12
+                    }
+                ],
                 layoutQualityBoard: [
                     {
                         name: "block1",
@@ -429,13 +507,13 @@
                         cor: 12,
                         top: 0,
                         left: 0
-                    },{
+                    }, {
                         name: "block2",
                         col: 8,
                         cor: 12,
                         top: 12,
                         left: 0
-                    },{
+                    }, {
                         name: "block3",
                         col: 16,
                         cor: 24,
@@ -789,6 +867,21 @@
                     ],
                     "progress": "80"
                 },
+                A07_2: [
+                    {
+                        title: "总待检数",
+                        value: 168,
+                    }, {
+                        title: "待确认数",
+                        value: 2223,
+                    }, {
+                        title: "MRB数量",
+                        value: 2134,
+                    }, {
+                        title: "加急数量",
+                        value: 434,
+                    }
+                ],
                 A08: [
                     {
                         text: "周交付台件",
@@ -1153,7 +1246,31 @@
                         "url": "",
                         "openType": "dialog"
                     }
-                ]
+                ],
+                /**
+                 * 仪表盘的值
+                 * value number
+                 **/
+                dashBoardData: {
+                    value: 65,
+                },
+                /**
+                 * 饼状图数据结构
+                 * title string  标题
+                 * subTitle string 子标题
+                 * data array 内容
+                 **/
+                pieChartData: {
+                    title: "",
+                    subTitle: "",
+                    data: [
+                        { value: 1048, name: '搜索引擎' },
+                        { value: 735, name: '直接访问' },
+                        { value: 580, name: '邮件营销' },
+                        { value: 484, name: '联盟广告' },
+                        { value: 300, name: '视频广告' }
+                    ]
+                }
             },
             mounted: function () {
                 let _this = this;
@@ -1490,7 +1607,7 @@
                         if (this.autoChange) {
                             callback();
                         }
-                    }, 5555000);
+                    }, 5000);
                     return this.timer;
                 },
                 //是否有交互

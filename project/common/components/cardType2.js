@@ -55,11 +55,9 @@ Vue.component('cardType2', {
             }else{
                 className = "cardArrowBox"
             }
-            console.log(this.title, this.long,this.arrow , "=============" + className);
             return className;
         },
         showArrow : function () {
-            console.log( this.title , "this.long && this.arrow", this.long && this.arrow );
             return (this.long && this.arrow);
         }
     }
