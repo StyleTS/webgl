@@ -9,11 +9,15 @@ Vue.component('tableDialog', {
                     <h1>{{propsdata.title}}</h1>
                     <div class="custom-table">
                         <ul>
-                            <li class="th"><span v-for="(item,index) in propsdata.colName">{{item}}</span></li>
+                            <li class="th">
+                                <span v-for="(item,index) in propsdata.colName" :style="{'width' : item.colWidth + '%'}">{{item.value}}</span>
+                            </li>
                         </ul>
                         <div class="table-content">
                             <ul>
-                                <li class="tr" v-for="(item,index) in propsdata.data"><span v-for="(value,key,index) in item" :class="{progress : key === 'progress'}" :style="{'backgroundSize':value + '% 100%'}">{{key === 'progress' ?  value + '%' : value}}</span></li>
+                                <li class="tr" v-for="(item,index) in propsdata.data">
+                                    <span v-for="(cellItem,cellIndex) in propsdata.colName" :class="{progress : cellItem.name === 'progress'}" :style="{'width' : cellItem.colWidth + '%','backgroundSize':setCellData(item,cellItem) + '% 100%'}" >{{setCellData(item,cellItem)}}</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -29,7 +33,7 @@ Vue.component('tableDialog', {
                 height: "100%",
                 border: "0",
                 overfollow: "hidden"
-            }
+            },
         }
     },
     props: {
@@ -42,7 +46,7 @@ Vue.component('tableDialog', {
             },
             colName: {
                 type: Object,
-                default: () => []
+                default: () => {}
             },
             data: {
                 type: Object,
@@ -54,15 +58,27 @@ Vue.component('tableDialog', {
         clickConte: function () {},
         onClose: function () {
             this.$emit('dialogonclose')
+        },
+        setCellData: function (mainData,firstRowData) {
+            return mainData[firstRowData["name"]];
         }
     },
     mounted: function () {
         //调用JQ滚动条插件
-        console.log($("#dialog").find('.table-wrap .custom-table .table-content'));
         $("#dialog").find('.table-wrap .custom-table .table-content').mCustomScrollbar({
             theme: 'minimal',
             scrollInertia: 550,
             mouseWheelPixels: 220,
         });
     },
+    watch:{
+        propsdata(){
+            
+        }
+    },
+    // computed:{
+    //     setCelData: function (firstdata,mainData,index) {
+    //         return 1;
+    //     }
+    // }
 })
