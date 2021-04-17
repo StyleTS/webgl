@@ -368,6 +368,8 @@ li {
 }
 .cardArrowBox.long.no-arrow:before {
   border-image-source: url(../images/mainFromBg-1.png);
+  border-width: 60px 95px 70px 270px !important;
+  border-image-slice: 60 95 70 270;
 }
 .cardArrowBox.long .arrow {
   display: block;

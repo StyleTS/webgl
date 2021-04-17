@@ -56,6 +56,7 @@ Vue.component('pieChart', {
                     }
                 ]
             };
+            console.log(_that.propdata);
             _that.pieChart.setOption(_that.pieChartOption); 
         }
     },

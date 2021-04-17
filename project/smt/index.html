@@ -77,6 +77,7 @@
     <script src="../common/components/dashBoard.js"></script>
     <script src="../common/components/devInfo.js"></script>
     <script src="../common/components/devInfo2.js"></script>
+    <script src="../common/components/deviceInfo.js"></script>
     <script src="../common/components/vitalDevInfo.js"></script>
     <script src="../common/components/humiture.js"></script>
     <script src="../common/components/attendance.js"></script>
@@ -113,6 +114,15 @@
                 </div>
             </template>
             <template slot="conter">
+                <conter-layout :layout="layoutDevice" :scroll=true v-show="indexPage==7" class="device-info">
+                    <template slot="block1" v-for="(val ,item) in deviceList">
+                        <transition name="fade">
+                            <card-type2 :long=true :arrow=false :key="item" v-show="indexPage==7" :title="val.deviceName">
+                                <device-info :propdata="val" :nowindex="indexPage"></device-info>
+                            </card-type2>
+                        </transition>
+                    </template>
+                </conter-layout>
                 <conter-layout :layout="layoutCheckBoard" v-show="indexPage==6">
                     <template slot="block1">
                         <transition name="shiftLeft">
@@ -462,11 +472,21 @@
                     logo1Url: "../common/images/Pangus-logo.png",
                     logo1Ur2: "",
                     // 修改button
-                    buttonList: ["铁路地图", "综合看板", "3D看板", "数据汇总", "重点事项", "质量检查", "预留看板2", "预留看板3"],
+                    buttonList: ["铁路地图", "综合看板", "3D看板", "数据汇总", "重点事项", "质量检查", "设备列表", "预留看板3"],
                     indexPage: "1",
                 },
                 name: '1',
                 upBox: false,
+                layoutDevice: [
+                    {
+                        name: "block1",
+                        col: 24,
+                        cor: 24,
+                        top: 0,
+                        left: 0,
+                        position: "relative"
+                    }
+                ],
                 layoutCheckBoard: [
                     {
                         name: "block1",
@@ -483,20 +503,20 @@
                     }, {
                         name: "block3",
                         col: 6,
-                        cor: 12,
+                        cor: 10,
                         top: 0,
                         left: 12
                     }, {
                         name: "block4",
                         col: 6,
-                        cor: 12,
+                        cor: 10,
                         top: 0,
                         left: 18
                     }, {
                         name: "block5",
                         col: 12,
-                        cor: 12,
-                        top: 12,
+                        cor: 14,
+                        top: 10,
                         left: 12
                     }
                 ],
@@ -1270,7 +1290,170 @@
                         { value: 484, name: '联盟广告' },
                         { value: 300, name: '视频广告' }
                     ]
-                }
+                },
+                /**
+                 * 设备列表数据
+                 * 
+                 * 
+                 **/
+                deviceList: [
+                    {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }, {
+                        "deviceName": "打印机1",
+                        "img": "../common/images/echarts-1.jpg",
+                        "chartData": {
+                            "xData": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+                            "valueData": ["100", "110", "120", "130", "140", "150", "160", "100", "110", "120", "130", "140", "150", "160", "120"],
+                        },
+                        "deviceInfo": {
+                            "deviceStatus": "normal",
+                            "onProduce": "NO123446",
+                            "crossTop": "123",
+                            "startTime": "2021-03-31 08:24:35",
+                            "utilization": "98%",
+                        },
+                    }
+
+                ]
             },
             mounted: function () {
                 let _this = this;
@@ -1300,6 +1483,7 @@
                     _this.isTouch($(this)[0]);
                 })
                 _this.isTouch(document);
+
 
                 //下面注释的是websocket方法.可以直接去掉注释使用
                 //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
@@ -1648,7 +1832,7 @@
                     this.indexPage = index + 1;
                     clearInterval(this.timer);
                     return this.autoChangePage(this.nextPage);
-                }
+                },
             },
             watch: {
                 //监听显示第几页变化

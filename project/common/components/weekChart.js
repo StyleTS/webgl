@@ -14,10 +14,8 @@ Vue.component('weekChart', {
   },
   props: {
     propdata: {
-      type: Array,
-      default: function () {
-        return []
-      }
+      type: [Object,Array],
+      default: ()=>[]
     },
     changeInit: {
       type: Boolean,
@@ -50,7 +48,7 @@ Vue.component('weekChart', {
       },
       xAxis: [{
         type: "category",
-        data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+        data: this.propdata.xData ? this.propdata.xData :["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
         axisTick: {
           alignWithLabel: true,
         },
@@ -126,7 +124,7 @@ Vue.component('weekChart', {
           },
         },
 
-        data: _this.propdata,
+        data: this.propdata.valueData ? this.propdata.valueData : _this.propdata,
       },],
     };
     this.weekChart.setOption(this.weekChartOption);
@@ -146,7 +144,8 @@ Vue.component('weekChart', {
       deep: true,
       handler: function (newV, oldV) {
         let _this = this;
-        _this.weekChartOption.series.data = _this.propdata;
+        _this.weekChartOption.series.xAxis = this.propdata.xData ? this.propdata.xData :["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+        _this.weekChartOption.series.data = this.propdata.valueData ? this.propdata.valueData : _this.propdata;
         _this.weekChart.setOption(_this.weekChartOption);
       }
     }
