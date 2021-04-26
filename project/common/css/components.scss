@@ -388,29 +388,39 @@ li {
             z-index: 100;
         }
     }
-
-    &.long {
+    &.long,&.mainForm4 {
         .cardCenter {
             background-image: none;
         }
-
         &:before {
             display: block;
             content: "";
             position: absolute;
             box-sizing: border-box;
             z-index: 1;
-            border-width: 131px 89px 142px 250px !important;
             border-style: solid;
             border-color: transparent;
-            border-image-source: url(../images/mainFromBg.png);
-            border-image-slice: 131 89 142 250;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: url(../images/mainFromContentBg.png) repeat;
             background-clip: padding-box;
+        }
+    }
+    &.mainForm4{
+        &:before {
+            border-width: 63px 62px 64px 61px !important;
+            border-image-source: url(../images/mainFromBg-4.png);
+            border-image-slice: 63 62 64 61;
+        }
+    }
+
+    &.long {
+        &:before {
+            border-width: 131px 89px 142px 250px !important;
+            border-image-source: url(../images/mainFromBg.png);
+            border-image-slice: 131 89 142 250;
         }
         &.no-arrow{
             &:before{

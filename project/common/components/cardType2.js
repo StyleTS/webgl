@@ -33,6 +33,10 @@ Vue.component('cardType2', {
             type: Boolean,
             default: false
         },
+        mainform4:{
+            type: Boolean,
+            default: false
+        },
         arrow:{
             type: Boolean,
             default: true
@@ -48,7 +52,9 @@ Vue.component('cardType2', {
         },
         boxClass : function () {
             let className = ""
-            if (this.long && !this.arrow) {
+            if (this.mainform4) {
+                className = "cardArrowBox mainForm4"
+            }else if (this.long && !this.arrow) {
                 className = "cardArrowBox long no-arrow"
             }else if (this.long && this.arrow) {
                 className = "cardArrowBox long"

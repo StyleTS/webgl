@@ -345,26 +345,33 @@ li {
   position: relative;
   z-index: 100;
 }
-.cardArrowBox.long .cardCenter {
+.cardArrowBox.long .cardCenter, .cardArrowBox.mainForm4 .cardCenter {
   background-image: none;
 }
-.cardArrowBox.long:before {
+.cardArrowBox.long:before, .cardArrowBox.mainForm4:before {
   display: block;
   content: "";
   position: absolute;
   box-sizing: border-box;
   z-index: 1;
-  border-width: 131px 89px 142px 250px !important;
   border-style: solid;
   border-color: transparent;
-  border-image-source: url(../images/mainFromBg.png);
-  border-image-slice: 131 89 142 250;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: url(../images/mainFromContentBg.png) repeat;
   background-clip: padding-box;
+}
+.cardArrowBox.mainForm4:before {
+  border-width: 63px 62px 64px 61px !important;
+  border-image-source: url(../images/mainFromBg-4.png);
+  border-image-slice: 63 62 64 61;
+}
+.cardArrowBox.long:before {
+  border-width: 131px 89px 142px 250px !important;
+  border-image-source: url(../images/mainFromBg.png);
+  border-image-slice: 131 89 142 250;
 }
 .cardArrowBox.long.no-arrow:before {
   border-image-source: url(../images/mainFromBg-1.png);

@@ -117,7 +117,7 @@
                 <conter-layout :layout="layoutDevice" :scroll=true v-show="indexPage==7" class="device-info">
                     <template slot="block1" v-for="(val ,item) in deviceList">
                         <transition name="fade">
-                            <card-type2 :long=true :arrow=false :key="item" v-show="indexPage==7" :title="val.deviceName">
+                            <card-type2 :mainform4="true" :key="item" v-show="indexPage==7" :title="val.deviceName">
                                 <device-info :propdata="val" :nowindex="indexPage"></device-info>
                             </card-type2>
                         </transition>
@@ -465,6 +465,7 @@
                 autoChange: true,   //自动换页开关
                 dialogdata: {},
                 indexPage: 1,
+                totalPage: 7,
                 timer: "",
                 //新增定义变量结束
                 headr: {
@@ -1773,7 +1774,7 @@
                     // console.log("last")
                     let index = this.indexPage;
                     index--;
-                    if (index < 1) index = 5;
+                    if (index < 1) index = this.totalPage;
                     this.indexPage = index;
                 },
                 //跳转下一页
@@ -1781,7 +1782,7 @@
                     // console.log("next");
                     let index = this.indexPage;
                     index++;
-                    if (index > 5) index = 1;
+                    if (index > this.totalPage) index = 1;
                     this.indexPage = index;
                 },
 
@@ -1791,7 +1792,7 @@
                         if (this.autoChange) {
                             callback();
                         }
-                    }, 5000);
+                    }, 555000);
                     return this.timer;
                 },
                 //是否有交互
