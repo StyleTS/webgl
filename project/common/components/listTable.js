@@ -12,11 +12,11 @@ Vue.component('listTable', {
                 <li v-for="(val2,item2) in propdata.colData" @click="rowOnClick(item2)" :key="val2.id?val2.id:item2">
                     <div v-for="(val3,item3) in propdata.colModel" :key="item3" :style="getStyle(item3)">
                         <div :style="getTextShowStyle(item3)" v-if="val3.formatterClass">
-                            <span :class="val3.formatterClass(val2[val3.name])">
+                            <span :class="val3.formatterClass(val2[val3.name])" :title="val3.formatterText?val3.formatterText(val2[val3.name]):val2[val3.name]">
                                 {{val3.formatterText?val3.formatterText(val2[val3.name]):val2[val3.name]}}
                             </span>
                         </div>
-                        <div :style="getTextShowStyle(item3)" v-else>
+                        <div :style="getTextShowStyle(item3)" :title="val3.formatterText?val3.formatterText(val2[val3.name]):val2[val3.name]" v-else>
                             {{val3.formatterText?val3.formatterText(val2[val3.name]):val2[val3.name]}}
                         </div>
                     </div>

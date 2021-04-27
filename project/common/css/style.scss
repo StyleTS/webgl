@@ -649,8 +649,11 @@ body {
 						margin-left: -1px;
 						height: 100%;
 						width: 100%;
+						display: flex;
+						line-height: 1.2;
+						justify-content: center;
+						align-items: center;
 						text-align: center;
-
 						&.progress {
 							background-image: url("../images/bg-progress.png");
 							background-repeat: no-repeat;
