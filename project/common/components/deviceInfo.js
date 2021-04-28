@@ -2,7 +2,7 @@ Vue.component('deviceInfo', {
     template: `
         <ul>
             <li class="img"><img :src="propdata.img" alt=""></li>
-            <li class="chart"><week-chart :change-init="nowindex==7" :propdata="propdata.chartData"></week-chart></li>
+            <li class="chart"><week-chart :change-init="nowindex" :propdata="propdata.chartData"></week-chart></li>
             
             <li class="info-list">
                 <p><span>设备状态：</span><span>{{propdata.deviceInfo.deviceStatus}}</span></p>
@@ -22,8 +22,8 @@ Vue.component('deviceInfo', {
             default: () => {}
         },
         nowindex:{
-            type: Number,
-            default: 1,
+            type: Boolean,
+            default: false,
         }
     },
     watch:{

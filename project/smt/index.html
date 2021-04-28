@@ -118,7 +118,7 @@
                     <template slot="block1" v-for="(val ,item) in deviceList">
                         <transition name="fade">
                             <card-type2 :mainform4="true" :key="item" v-show="indexPage==7" :title="val.deviceName">
-                                <device-info :propdata="val" :nowindex="indexPage"></device-info>
+                                <device-info :propdata="val" :nowindex="indexPage==7"></device-info>
                             </card-type2>
                         </transition>
                     </template>
