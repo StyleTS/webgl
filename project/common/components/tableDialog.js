@@ -16,7 +16,14 @@ Vue.component('tableDialog', {
                         <div class="table-content">
                             <ul>
                                 <li class="tr" v-for="(item,index) in propsdata.data">
-                                    <span v-for="(cellItem,cellIndex) in propsdata.colName" :class="{progress : cellItem.name === 'progress'}" :style="{'width' : cellItem.colWidth + '%','backgroundSize':setCellData(item,cellItem) + '% 100%'}" >{{setCellData(item,cellItem)}}</span>
+                                    <span
+                                        v-for="(cellItem,cellIndex) in propsdata.colName"
+                                        :class="{progress : cellItem.name === 'progress'}"
+                                        :style="{'width' : cellItem.colWidth + '%',
+                                                'backgroundSize':setCellData(item,cellItem) + '% 100%',
+                                                'backgroundColor':setBg(item),
+                                                }" 
+                                    >{{setCellData(item,cellItem)}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -61,6 +68,13 @@ Vue.component('tableDialog', {
         },
         setCellData: function (mainData,firstRowData) {
             return mainData[firstRowData["name"]];
+        },
+        setBg: function (mainData) {
+            let style = "";
+            if(parseFloat(mainData["passrate"]) < 95){
+                style = "#ff0000";
+            }
+            return style;
         }
     },
     mounted: function () {
@@ -77,8 +91,6 @@ Vue.component('tableDialog', {
         }
     },
     // computed:{
-    //     setCelData: function (firstdata,mainData,index) {
-    //         return 1;
-    //     }
+
     // }
 })

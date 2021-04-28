@@ -39,8 +39,8 @@ Vue.component("iconList", {
                         "value": "机器状态",
                         "colWidth": "15",
                     },{
-                        "name":"logTime",
-                        "value": "登记时间",
+                        "name":"passrate",
+                        "value": "合格率",
                         "colWidth": "15",
                     },{
                         "name":"progress",
@@ -53,161 +53,161 @@ Vue.component("iconList", {
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "55"
                 }, {
                     "machineName": "打印机2",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "96",
                     "progress": "100"
                 }, {
                     "machineName": "打印机3",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "97",
                     "progress": "25"
                 }, {
                     "machineName": "打印机4",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "98",
                     "progress": "50"
                 }, {
                     "machineName": "打印机5",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "99",
                     "progress": "95"
                 }, {
                     "machineName": "打印机6",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "91",
                     "progress": "60"
                 }, {
                     "machineName": "打印机7",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "92",
                     "progress": "30"
                 }, {
                     "machineName": "打印机8",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "20"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "93",
                     "progress": "36"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "98",
                     "progress": "50"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "19"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "15"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "99",
                     "progress": "4"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "88"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "10"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "100",
                     "progress": "50"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "50"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "12"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "50"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "50"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "50"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "50"
                 }, {
                     "machineName": "打印机9",
                     "machineType": "固定资产",
                     "machineNo": "PG34578983",
                     "machineStatus": "normal",
-                    "logTime": "2021-03-21",
+                    "passrate": "95",
                     "progress": "50"
                 }, ]
             }
